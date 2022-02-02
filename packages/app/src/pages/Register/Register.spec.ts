@@ -1,6 +1,8 @@
-
+import Register from "./Register.vue"
+import {render, screen} from "@testing-library/vue";
 describe("Register", () => {
   it("should ", () => {
-    expect(1).toBe(1);
+    render(Register)
+    screen.getByText('Registrarse')
   });
 });

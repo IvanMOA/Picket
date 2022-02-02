@@ -15,5 +15,5 @@
     }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],
-  "exclude": ["node_modules", "dist", "public", "tests/**/*",]
+  "exclude": ["node_modules", "dist", "public", "**/*.spec.ts",]
 }
