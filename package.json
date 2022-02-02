@@ -1,0 +1,11 @@
+{
+  "name": "LabIHC",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "emulators": "firebase emulators:start --project demo-events"
+  }
+}
