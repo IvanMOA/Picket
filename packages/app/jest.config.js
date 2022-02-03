@@ -11,4 +11,5 @@ module.exports = {
       '^@/(.*)$': resolve(__dirname, './src/$1'),
   },
   moduleFileExtensions: ['vue', 'js', 'ts'],
+  setupFilesAfterEnv: ['<rootDir>/jest-setup.ts']
 };
