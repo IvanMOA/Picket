@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
+    "@cypress/snapshot": "^2.1.7",
     "@cypress/vite-dev-server": "~2.2",
     "@cypress/vue": "~3.0",
     "@tailwindcss/aspect-ratio": "~0.4",

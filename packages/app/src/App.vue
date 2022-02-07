@@ -1,3 +1,7 @@
+<script setup>
+import RoutesGuard from "@/components/RoutesGuard/RoutesGuard.vue";</script>
 <template>
-  <router-view></router-view>
+  <RoutesGuard>
+    <router-view></router-view>
+  </RoutesGuard>
 </template>

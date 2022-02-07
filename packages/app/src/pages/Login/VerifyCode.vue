@@ -1,17 +1,21 @@
 <script setup>
-import {useVerifyCode} from "./composables/useVerifyCode";
+import { useVerifyCode } from "./composables/useVerifyCode";
+import { useRouter } from "vue-router";
+
 const verifyCodeForm = {
-	code: ''
-}
-const { verifyCode, isVerifyingCode } = useVerifyCode()
+  code: ""
+};
+const router = useRouter();
+const { verifyCode, isVerifyingCode } = useVerifyCode();
 const handleSubmit = async () => {
-	verifyCode(verifyCodeForm.code)
-}
+  await verifyCode(verifyCodeForm.code);
+  await router.push({ name: "Home" });
+};
 </script>
 
 <template>
-<div>
-	<input v-model="verifyCodeForm.code" data-cy="verification-code-input"/>
-	<button @click="handleSubmit" :disabled="isVerifyingCode" data-cy="submit-btn">Verificar código</button>
-</div>
+  <div>
+    <input v-model="verifyCodeForm.code" data-cy="verification-code-input" />
+    <button :disabled="isVerifyingCode" data-cy="submit-btn" @click="handleSubmit">Verificar código</button>
+  </div>
 </template>

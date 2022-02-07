@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import './commands'
+import "./commands";
 declare global {
   namespace Cypress {
     interface Chainable {
@@ -7,9 +7,9 @@ declare global {
        * Custom command to select DOM element by data-cy attribute.
        * @example cy.dataCy('greeting')
        */
-      dataCy(value: string): Chainable<Element>
-      register(name: string, phoneNumber: string): Chainable<Element>
-      login(phoneNumber: string): Chainable<Element>
+      dataCy(value: string, opts?: any): Chainable<Element>;
+      register(name: string, phoneNumber: string): Chainable<Element>;
+      login(phoneNumber: string): Chainable<Element>;
     }
   }
 }
