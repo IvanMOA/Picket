@@ -4,8 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "emulators": "firebase emulators:start --project demo-events"
+  },
+  "dependencies": {
+    "prettier": "^2.5.1"
   }
 }

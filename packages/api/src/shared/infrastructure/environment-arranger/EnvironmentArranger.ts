@@ -11,4 +11,7 @@ export class EnvironmentArranger {
             `http://localhost:9099/emulator/v1/projects/${firebaseProjectId}/accounts`
         );
     }
+    public static async disconnect() {
+        await k.destroy()
+    }
 }
