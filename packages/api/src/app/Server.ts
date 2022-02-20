@@ -7,6 +7,7 @@ import cors from "cors";
 import axios from "axios";
 import { firebaseProjectId } from "../shared/infrastructure/clients/Firebase";
 import { morganMiddleware } from "./middleware/morganMiddleware";
+import { logger } from "./logger/logger";
 export class Server {
   public static create() {
     const app = express();
@@ -19,6 +20,10 @@ export class Server {
         schema,
         rootValue,
         graphiql: true,
+        customFormatErrorFn: (error) => {
+          logger.error(error);
+          return error;
+        },
       })
     );
     app.post("/protected/environment-arranger/clean-up", async (r_, res) => {
