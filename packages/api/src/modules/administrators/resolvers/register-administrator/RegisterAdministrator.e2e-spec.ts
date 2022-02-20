@@ -2,7 +2,7 @@ import _request from "supertest";
 import { EnvironmentArranger } from "../../../../shared/infrastructure/environment-arranger/EnvironmentArranger";
 import { Server } from "../../../../app/Server";
 import * as faker from "faker";
-import { Roles } from "../../../users/domain/Roles";
+import { Role } from "../../../users/domain/Role";
 beforeEach(async () => {
   await EnvironmentArranger.cleanUp();
 });
@@ -42,7 +42,7 @@ describe("Register administrator", () => {
             email: faker.internet.email(),
             password: password,
             confirmationPassword: password,
-            role: Roles.ADMIN,
+            role: Role.ADMIN,
           },
         },
       });

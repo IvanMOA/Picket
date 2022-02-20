@@ -1,5 +1,5 @@
 import { Knex } from "knex";
-import { roles } from "../src/modules/users/domain/Roles";
+import { roles } from "../src/modules/users/domain/Role";
 export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable("administrators", (t) => {
     t.string("id").unique().notNullable().primary();
