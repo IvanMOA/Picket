@@ -6,6 +6,9 @@ generates:
       - "typescript"
       - "typescript-operations"
       - "typescript-resolvers"
+    config:
+      namingConvention:
+        enumValues: keep
   ./graphql.schema.json:
     plugins:
       - "introspection"
