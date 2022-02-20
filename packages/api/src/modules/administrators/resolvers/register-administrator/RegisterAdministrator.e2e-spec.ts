@@ -64,6 +64,7 @@ describe("Register administrator", () => {
           },
         },
       });
+    console.log("wtf", res.body);
     const errors = res.body.data.registerAdministrator.errors;
     expect(errors.name).toBeDefined();
     expect(errors.email).toBeDefined();
