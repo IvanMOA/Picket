@@ -2,7 +2,7 @@ import { Knex } from "knex";
 export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable("events", (t) => {
     t.uuid("id").unique().defaultTo(knex.raw("gen_random_uuid()"));
-    t.string("place_id").unsigned().references("places.id").onDelete("CASCADE");
+    t.uuid("place_id").unsigned().references("places.id").onDelete("CASCADE");
     t.string("name");
     t.integer("tickets_per_person");
     t.string("description");
