@@ -1,19 +1,16 @@
 import { Role } from "../../users/domain/Role";
+import { v4 as uuid } from "uuid";
 type AdministratorProps = {
-  id: string;
   email: string;
   name: string;
   role: Role;
 };
 export class Administrator {
-  constructor(private readonly props: AdministratorProps) {}
+  constructor(
+    private readonly props: AdministratorProps,
+    public readonly id = uuid()
+  ) {}
   // region Class properties getters / setters
-  public get id(): string {
-    return this.props.id;
-  }
-  public set id(id: string) {
-    this.props.id = id;
-  }
   public get email(): string {
     return this.props.email;
   }

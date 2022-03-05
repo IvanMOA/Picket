@@ -1,4 +1,3 @@
-import { v4 as uuid } from "uuid";
 import { auth } from "../../../../shared/infrastructure/clients/Firebase";
 import { z } from "zod";
 import {
@@ -27,7 +26,6 @@ export const makeRegisterAdministrator = (
       "RegisterAdministratorValidationError"
     );
     const administrator = new Administrator({
-      id: uuid(),
       name: args.input.name,
       email: args.input.email,
       role: args.input.role,

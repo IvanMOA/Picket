@@ -6,6 +6,7 @@ export const schema = buildSchema(`
     enum Role {
       VISITOR
       ADMIN
+      SUPERADMIN
     }
     type Visitor {
         id: String!

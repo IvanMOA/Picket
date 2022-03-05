@@ -2,9 +2,17 @@ import { k } from "../clients/Knex";
 import axios from "axios";
 import { firebaseProjectId } from "../clients/Firebase";
 export class EnvironmentArranger {
-  private static tables = ["visitors", "administrators", "tickets", "events"];
+  private static tables = [
+    "tickets",
+    "visitors",
+    "administrators",
+    "tickets",
+    "events",
+  ];
   public static async cleanUp() {
-    for (const table of this.tables) await k(table).truncate();
+    for (const table of this.tables)
+      await k.raw(`DELETE
+                   FROM ${table}`);
     await axios.delete(
       `http://localhost:9099/emulator/v1/projects/${firebaseProjectId}/accounts`
     );
