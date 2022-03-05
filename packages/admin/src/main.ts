@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import { createHead } from "@vueuse/head";
 import "./assets/index.postcss";
+import "element-plus/dist/index.css";
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:4004";
 const head = createHead();

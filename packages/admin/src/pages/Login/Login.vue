@@ -1,25 +1,36 @@
-<script setup>
-</script>
+<script lang="ts" setup>
+import { ElButton, ElForm, ElFormItem, ElInput } from "element-plus";
+import { reactive, ref } from "vue";
+import { swallowAsync, ValidationError } from "@picket/utilities";
+import { flow } from "fp-ts/function";
+const formErrors = reactive<Record<string, string[]> | null>(null)
+const isLoggingIn = ref(false);
+const loginForm = reactive({
+  email: "",
+  password: ""
+});
+const login = async () => {
+  isLoggingIn.value = true;
 
+  isLoggingIn.false = true;
+};
+const handleLogin = flow(
+  swallowAsync(ValidationError, (e) => formErrors = e.)
+);
+</script>
 <template>
   <div class="flex flex-col items-center justify-center w-screen h-screen bg-gray-200 text-gray-700">
-    <h1 class="font-bold text-2xl">Welcome Back :)</h1>
-    <form action="" class="flex flex-col bg-white rounded shadow-lg p-12 mt-12">
-      <label class="font-semibold text-xs" for="usernameField">Username or Email</label>
-      <input class="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
-             type="text">
-      <label class="font-semibold text-xs mt-3" for="passwordField">Password</label>
-      <input class="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
-             type="password">
-      <button
-        class="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700">
+    <h1 class="font-bold text-2xl">Bienvenido de vuelta!</h1>
+    <ElForm class="flex flex-col bg-white rounded shadow-lg p-8 mt-12" label-position="top">
+      <ElFormItem label="Correo">
+        <ElInput v-model="loginForm.email" data-testid="email-input"></ElInput>
+      </ElFormItem>
+      <ElFormItem label="Contraseña">
+        <ElInput v-model="loginForm.password" data-testid="password-input"></ElInput>
+      </ElFormItem>
+      <ElButton type="primary">
         Login
-      </button>
-      <div class="flex mt-6 justify-center text-xs">
-        <a class="text-blue-400 hover:text-blue-500" href="#">Forgot Password</a>
-        <span class="mx-2 text-gray-300">/</span>
-        <a class="text-blue-400 hover:text-blue-500" href="#">Sign Up</a>
-      </div>
-    </form>
+      </ElButton>
+    </ElForm>
   </div>
 </template>
