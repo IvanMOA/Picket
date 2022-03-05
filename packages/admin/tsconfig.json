@@ -5,15 +5,39 @@
     "moduleResolution": "node",
     "strict": true,
     "jsx": "preserve",
+    "strictNullChecks": true,
+    "alwaysStrict": true,
     "sourceMap": false,
-    "lib": ["esnext", "dom"],
-    "types": ["vite/client", "jest"],
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "types": [
+      "vite/client",
+      "jest"
+    ],
     "resolveJsonModule": true,
-    "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
+    "plugins": [
+      {
+        "name": "@vuedx/typescript-plugin-vue"
+      }
+    ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue", "./jest-setup.ts"],
-  "exclude": ["node_modules", "dist", "public", "**/*.spec.ts",]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.vue",
+    "./jest-setup.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "public",
+    "**/*.spec.ts"
+  ]
 }

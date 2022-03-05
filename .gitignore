@@ -9,6 +9,8 @@ firebase-debug.*.log*
 
 # Generated code
 generated/
+dist/
+screenshots/
 
 # Firebase cache
 .firebase/

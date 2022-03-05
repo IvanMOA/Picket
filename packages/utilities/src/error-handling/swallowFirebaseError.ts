@@ -7,7 +7,7 @@ export const swallowFirebaseError = (error: any) => {
   if (errorMatch(/email-already-exists/g)) {
     throw new ValidationError({ email: ["email_already_exists"] });
   }
-  if (errorMatch(/invalid-email/g)) {
+  if (errorMatch(/invalid-email/g) || errorMatch(/missing-email/g)) {
     throw new ValidationError({ email: ["invalid_email"] });
   }
   if (errorMatch(/invalid-password/g)) {
