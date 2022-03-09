@@ -6,7 +6,7 @@
     "build": "vite build",
     "preview": "vite build && vite preview",
     "start": "yarn dev & wait-on tcp:3000 -v",
-    "test": "cypress open",
+    "test:e2e": "cypress open",
     "test-components": "cypress open-ct",
     "test:ci": "cypress run --headless",
     "test:ci-components": "cypress run-ct"
@@ -21,6 +21,7 @@
     "firebase": "^9.6.5",
     "fp-ts": "^2.11.8",
     "jest": "^27.4.7",
+    "pinia": "^2.0.11",
     "ramda": "^0.28.0",
     "ts-jest": "^27.1.3",
     "vee-validate": "^4.5.8",

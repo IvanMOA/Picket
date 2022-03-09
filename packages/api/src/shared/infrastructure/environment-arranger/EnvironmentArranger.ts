@@ -1,6 +1,7 @@
 import { k } from "../clients/Knex";
 import axios from "axios";
 import { firebaseProjectId } from "../clients/Firebase";
+import { DatabaseSeeder } from "../../../../seed/DatabaseSeeder";
 export class EnvironmentArranger {
   private static tables = [
     "tickets",
@@ -16,6 +17,9 @@ export class EnvironmentArranger {
     await axios.delete(
       `http://localhost:9099/emulator/v1/projects/${firebaseProjectId}/accounts`
     );
+  }
+  public static async arrange() {
+    await DatabaseSeeder.run();
   }
   public static async disconnect() {
     await k.destroy();

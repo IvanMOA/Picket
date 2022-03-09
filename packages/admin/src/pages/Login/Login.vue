@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import InputErrors from "../../components/input-errors/InputErrors.vue";
-import { ElButton, ElForm, ElFormItem, ElInput } from "element-plus";
+import { ElButton, ElForm, ElFormItem, ElInput, ElNotification } from "element-plus";
 import { computed, reactive, ref } from "vue";
-import { flow } from "fp-ts/function";
-import { swallowAsync, UnknownError, ValidationError } from "@picket/utilities";
+import { handleError } from "@/errors/handleError";
 import { authService } from "@/services/auth/authService";
 import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
+import { ValidationError } from "@/errors/ValidationError";
 const formErrors = reactive<Record<string, string[]>>({});
 const areFormErrorsEmpty = computed(() => Object.keys(formErrors).length === 0);
 const isLoggingIn = ref(false);
@@ -13,14 +14,25 @@ const loginForm = reactive({
   email: "",
   password: ""
 });
-const safeLogin = flow(
-  swallowAsync(ValidationError, (e) => Object.assign(formErrors, e.errorBag)),
-  swallowAsync(UnknownError, (e) => alert(e.message))
-)(authService.login);
+const { t } = useI18n();
+const router = useRouter();
 const handleLogin = async () => {
   isLoggingIn.value = true;
-  await safeLogin(loginForm.email, loginForm.password);
-  isLoggingIn.value = true;
+  try {
+    await authService.login(loginForm.email, loginForm.password);
+    await router.push({ name: "Dashboard" });
+  } catch (_error) {
+    console.log(_error);
+    const error = handleError(_error);
+    if (error instanceof ValidationError) Object.assign(formErrors, error.errorBag);
+    else ElNotification({
+      title: "Error",
+      message: t(error.message),
+      type: "error"
+    });
+  } finally {
+    isLoggingIn.value = false;
+  }
 };
 </script>
 <template>
@@ -33,9 +45,9 @@ const handleLogin = async () => {
         <InputErrors :errors="formErrors.email" />
       </ElFormItem>
       <ElFormItem label="Contraseña">
-        <ElInput v-model="loginForm.password" data-testid="password-input"></ElInput>
+        <ElInput v-model="loginForm.password" data-testid="password-input" type="password"></ElInput>
       </ElFormItem>
-      <ElButton type="primary" @click="handleLogin">
+      <ElButton :disabled="isLoggingIn" data-testid="submit-btn" type="primary" @click="handleLogin">
         Login
       </ElButton>
     </ElForm>

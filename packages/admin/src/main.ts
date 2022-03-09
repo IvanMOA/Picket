@@ -7,6 +7,7 @@ import "./assets/index.postcss";
 import "element-plus/dist/index.css";
 import axios from "axios";
 import { esLocale } from "@/locales/es";
+import { createPinia } from "pinia";
 axios.defaults.baseURL = "http://localhost:4004";
 const i18n = createI18n({
   locale: "es",
@@ -16,6 +17,7 @@ const i18n = createI18n({
 });
 const head = createHead();
 const app = createApp(App);
+app.use(createPinia());
 app.use(router);
 app.use(head);
 app.use(i18n);

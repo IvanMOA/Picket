@@ -27,7 +27,11 @@ export class Server {
       })
     );
     app.post("/protected/environment-arranger/clean-up", async (r_, res) => {
-      await EnvironmentArranger.cleanUp();
+      await EnvironmentArranger.cleanUp().catch(console.error);
+      res.send(200);
+    });
+    app.post("/protected/environment-arranger/arrange", async (r_, res) => {
+      await EnvironmentArranger.arrange().catch(console.error);
       res.send(200);
     });
     app.get("/protected/verification-code", async (req, res) => {

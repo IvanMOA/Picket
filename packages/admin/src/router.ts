@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "@/pages/Home/Home.vue";
+import Dashboard from "@/pages/Dashboard/Dashboard.vue";
 import About from "@/pages/About/About.vue";
 import Login from "@/pages/Login/Login.vue";
 export enum AuthType {
@@ -12,8 +12,12 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      component: Home,
-      name: "Home",
+      redirect: "/dashboard",
+    },
+    {
+      path: "/dashboard",
+      component: Dashboard,
+      name: "Dashboard",
       meta: {
         authType: AuthType.PRIVATE,
       },
@@ -32,6 +36,7 @@ const router = createRouter({
       component: Login,
       meta: {
         title: "Login",
+        authType: AuthType.ONLY_PUBLIC,
       },
     },
   ],

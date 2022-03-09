@@ -6,21 +6,23 @@ import firebase from "firebase/compat";
 import { RouteLocationNormalized, useRouter } from "vue-router";
 import { AuthType } from "@/router";
 import Unsubscribe = firebase.Unsubscribe;
+import { useUserStore } from "@/stores/UserStore";
 const user = ref<User | null>(null);
 const loadingUser = ref(true);
 const router = useRouter();
+const userStore = useUserStore();
 let unsubscribeFn: Unsubscribe;
 watchEffect((onCleanup) => {
   const isOnlyPublicWhileUserIsLoggedIn = (route: RouteLocationNormalized) => route.meta.authType === AuthType.ONLY_PUBLIC && user.value !== null;
   if (isOnlyPublicWhileUserIsLoggedIn(router.currentRoute.value)) {
-    router.push({ name: "Home" });
+    router.push({ name: "Dashboard" });
   }
   const unregisterBeforeEachRouteGuard = router.beforeEach((to, from, next) => {
     if (to.meta.authType === AuthType.PRIVATE && user.value === null) {
-      return next({ name: "AskForVerificationCode" });
+      return next({ name: "Login" });
     }
     if (isOnlyPublicWhileUserIsLoggedIn(to)) {
-      return next({ name: "Home" });
+      return next({ name: "Dashboard" });
     }
     return next();
   });
@@ -28,7 +30,7 @@ watchEffect((onCleanup) => {
 });
 onMounted(async () => {
   unsubscribeFn = onAuthStateChanged(auth, (_user) => {
-    console.log(_user);
+    if (_user) userStore.setUser(_user);
     loadingUser.value = false;
     user.value = _user;
   });

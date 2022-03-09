@@ -4,15 +4,17 @@ import { Administrator } from "../src/modules/administrators/domain/Administrato
 import { Role } from "../src/modules/users/domain/Role";
 const administratorsRepository = new KnexAdministratorsRepository();
 export class AdministratorsSeeder {
-  static async run() {}
-  private async createSuperadmin() {
+  static async run() {
+    await this.createSuperadmin();
+  }
+  private static async createSuperadmin() {
     /**
      * @warning
      * Utilizar solo para propósitos de desarrollo
      */
     const superadmin = new Administrator({
       name: "Primer superadmin",
-      email: "superadmin@picky.com",
+      email: "superadmin@picket.com",
       role: Role.SUPERADMIN,
     });
     await auth.createUser({
