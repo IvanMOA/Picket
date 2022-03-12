@@ -4,6 +4,7 @@ type AdministratorProps = {
   email: string;
   name: string;
   role: Role;
+  dependencyId: string;
 };
 export class Administrator {
   constructor(
@@ -28,6 +29,12 @@ export class Administrator {
   }
   public set role(role: Role) {
     this.props.role = role;
+  }
+  public get dependencyId(): string {
+    return this.props.dependencyId;
+  }
+  public set dependencyId(dependencyId: string) {
+    this.props.dependencyId = dependencyId;
   }
   //endregion
 }

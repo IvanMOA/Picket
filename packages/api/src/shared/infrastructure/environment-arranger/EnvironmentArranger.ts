@@ -9,6 +9,7 @@ export class EnvironmentArranger {
     "administrators",
     "tickets",
     "events",
+    "dependencies",
   ];
   public static async cleanUp() {
     for (const table of this.tables)

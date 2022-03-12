@@ -8,6 +8,8 @@ import axios from "axios";
 import { firebaseProjectId } from "../shared/infrastructure/clients/Firebase";
 import { morganMiddleware } from "./middleware/morganMiddleware";
 import { logger } from "./logger/logger";
+import jwt from "jsonwebtoken";
+import jwtDecode from "jwt-decode";
 export class Server {
   public static create() {
     const app = express();
@@ -43,6 +45,17 @@ export class Server {
           verificationCode.phoneNumber === `+52${req.query.phone_number}`
       );
       res.send({ verification_code: result?.code ?? "" });
+    });
+    app.post("/protected/generate-signed-jwt", async (req, res) => {
+      const payload = jwtDecode(req.body.jwt) as Object;
+      jwt.sign(
+        { ...payload },
+        "Q283y8KDKAhelR7QQVJS0KjQud4RJe23bZsxRZtZ7x6l5bsrhWoxpWM6wEN6",
+        (err: any, token: any) => {
+          if (err) res.status(500).send(err);
+          res.send(token);
+        }
+      );
     });
     return app;
   }

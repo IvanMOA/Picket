@@ -29,6 +29,7 @@ export const makeRegisterAdministrator = (
       name: args.input.name,
       email: args.input.email,
       role: args.input.role,
+      dependencyId: args.input.dependencyId,
     });
     await auth.createUser({
       displayName: administrator.name,

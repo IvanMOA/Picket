@@ -31,6 +31,7 @@ watchEffect((onCleanup) => {
 onMounted(async () => {
   unsubscribeFn = onAuthStateChanged(auth, (_user) => {
     if (_user) userStore.setUser(_user);
+    _user?.getIdToken().then(console.log);
     loadingUser.value = false;
     user.value = _user;
   });

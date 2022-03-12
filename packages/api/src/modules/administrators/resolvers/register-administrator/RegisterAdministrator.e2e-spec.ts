@@ -3,6 +3,7 @@ import { EnvironmentArranger } from "../../../../shared/infrastructure/environme
 import { Server } from "../../../../app/Server";
 import * as faker from "faker";
 import { Role } from "../../../users/domain/Role";
+import { k } from "../../../../shared/infrastructure/clients/Knex";
 beforeEach(async () => {
   await EnvironmentArranger.cleanUp();
 });
@@ -32,6 +33,10 @@ describe("Register administrator", () => {
             }`;
   it("Registers an administrator if one with its email does not exists yet", async () => {
     const password = faker.internet.password();
+    await k("dependencies").insert({
+      id: "23161",
+      name: "Superadmins dependency",
+    });
     const res = await req()
       .post("/graphql")
       .send({
@@ -43,6 +48,7 @@ describe("Register administrator", () => {
             password: password,
             confirmationPassword: password,
             role: Role.ADMIN,
+            dependencyId: "23161",
           },
         },
       });
@@ -61,10 +67,10 @@ describe("Register administrator", () => {
             password: "",
             confirmationPassword: "",
             role: "",
+            dependencyId: "",
           },
         },
       });
-    console.log("wtf", res.body);
     const errors = res.body.data.registerAdministrator.errors;
     expect(errors.name).toBeDefined();
     expect(errors.email).toBeDefined();

@@ -8,7 +8,11 @@ export class KnexAdministratorsRepository implements AdministratorsRepository {
       name: administrator.name,
       email: administrator.email,
       role: administrator.role,
+      dependency_id: administrator.dependencyId,
     });
+    // .onConflict()
+    // .merge(["name"])
+    // .returning("*");
   }
   delete(administrator: Administrator): Promise<void> {
     return Promise.resolve(undefined);
