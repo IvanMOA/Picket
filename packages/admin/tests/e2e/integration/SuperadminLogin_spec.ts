@@ -9,10 +9,7 @@ describe("Super admin login", async () => {
     );
   });
   it("Logs in as a superadmin", () => {
-    cy.visit("/login");
-    cy.testId("email-input").type("superadmin@picket.com");
-    cy.testId("password-input").type("superadmin");
-    cy.testId("submit-btn").click();
+    cy.login("superadmin@picket.com", "superadmin");
     cy.url().should("contain", "dashboard");
   });
 });

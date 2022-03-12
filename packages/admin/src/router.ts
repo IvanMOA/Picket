@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Dashboard from "@/pages/Dashboard/Dashboard.vue";
+import Administrators from "@/pages/Administrators/Administrators.vue";
 import About from "@/pages/About/About.vue";
 import Login from "@/pages/Login/Login.vue";
 export enum AuthType {
@@ -18,6 +19,14 @@ const router = createRouter({
       path: "/dashboard",
       component: Dashboard,
       name: "Dashboard",
+      meta: {
+        authType: AuthType.PRIVATE,
+      },
+    },
+    {
+      path: "/users",
+      component: Administrators,
+      name: "Administrators",
       meta: {
         authType: AuthType.PRIVATE,
       },

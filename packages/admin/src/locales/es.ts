@@ -8,4 +8,6 @@ export const esLocale = {
   dashboard_welcome: "Bienvenido, {name}",
   dashboard_description: "Revisa lo que está sucediendo",
   logout: "Cerrar sesión",
+  statistics: "Estadísticas",
+  users: "Usuarios",
 };
