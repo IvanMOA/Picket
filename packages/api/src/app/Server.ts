@@ -29,11 +29,11 @@ export class Server {
       })
     );
     app.post("/protected/environment-arranger/clean-up", async (r_, res) => {
-      await EnvironmentArranger.cleanUp().catch(console.error);
+      await EnvironmentArranger.cleanUp().catch(console.log);
       res.send(200);
     });
     app.post("/protected/environment-arranger/arrange", async (r_, res) => {
-      await EnvironmentArranger.arrange().catch(console.error);
+      await EnvironmentArranger.arrange().catch(console.log);
       res.send(200);
     });
     app.get("/protected/verification-code", async (req, res) => {
@@ -51,9 +51,9 @@ export class Server {
       jwt.sign(
         { ...payload },
         "Q283y8KDKAhelR7QQVJS0KjQud4RJe23bZsxRZtZ7x6l5bsrhWoxpWM6wEN6",
-        (err: any, token: any) => {
+        (err: any, jwt: any) => {
           if (err) res.status(500).send(err);
-          res.send(token);
+          res.send({ jwt });
         }
       );
     });

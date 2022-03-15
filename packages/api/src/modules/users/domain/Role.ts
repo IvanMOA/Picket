@@ -1,6 +1,6 @@
 export enum Role {
-  SUPERADMIN = "SUPERADMIN",
-  ADMIN = "ADMIN",
-  VISITOR = "VISITOR",
+  SUPERADMIN = "superadmin",
+  ADMIN = "admin",
+  VISITOR = "visitor",
 }
 export const roles = [Role.SUPERADMIN, Role.ADMIN, Role.VISITOR] as const;

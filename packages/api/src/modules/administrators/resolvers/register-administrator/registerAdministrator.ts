@@ -14,7 +14,7 @@ const registerAdministratorValidator = z.object({
   email: z.string().min(10).max(100).email(),
   password: z.string().min(6).max(100),
   confirmationPassword: z.string().min(6).max(100),
-  role: z.enum([Role.ADMIN, Role.VISITOR]),
+  role: z.enum([Role.ADMIN, Role.VISITOR, Role.SUPERADMIN]),
 });
 export const makeRegisterAdministrator = (
   administratorsRepository: AdministratorsRepository
@@ -32,9 +32,14 @@ export const makeRegisterAdministrator = (
       dependencyId: args.input.dependencyId,
     });
     await auth.createUser({
+      uid: administrator.id,
       displayName: administrator.name,
       email: administrator.email,
       password: args.input.password,
+    });
+    await auth.setCustomUserClaims(administrator.id, {
+      role: args.input.role,
+      dependencyId: args.input.dependencyId,
     });
     await administratorsRepository.save(administrator);
     return {

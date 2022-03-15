@@ -28,12 +28,12 @@ const props = defineProps<{
         <div>
           <AdminLayoutSidebarLink
             :icon="Histogram"
-            :name="$t('statistics')"
+            :name="$t('statistics_section_title')"
             to="/dashboard"
           />
           <AdminLayoutSidebarLink
             :icon="UserFilled"
-            :name="$t('users')"
+            :name="$t('users_section_title')"
             to="/users"
           />
         </div>

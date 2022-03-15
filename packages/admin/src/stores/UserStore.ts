@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { User } from "firebase/auth";
+import { Ref } from "vue";
 type UserStoreState = {
   user: User | null;
 };
