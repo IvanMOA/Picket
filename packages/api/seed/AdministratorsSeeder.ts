@@ -22,7 +22,7 @@ export class AdministratorsSeeder {
       id: "99991",
       name: "Superadmins",
     });
-    await registerAdministrator.safeRun({
+    await registerAdministrator.run({
       name: "Primer superadmin",
       email: "superadmin@picket.com",
       role: Role.SUPERADMIN,
@@ -35,7 +35,7 @@ export class AdministratorsSeeder {
     await Promise.all(
       range(0, 120).map(async () => {
         const password = faker.internet.password();
-        const res = await registerAdministrator.safeRun({
+        const res = await registerAdministrator.run({
           name: faker.name.firstName() + faker.name.lastName(),
           email: faker.internet.email(),
           role: Role.SUPERADMIN,

@@ -1,6 +1,6 @@
 import morgan, { StreamOptions } from "morgan";
-import { logger } from "../logger/logger";
 import { Request } from "express";
+import { logger } from "../../shared/infrastructure/logger/logger";
 const stream: StreamOptions = {
   write: (message) => logger.http(message),
 };

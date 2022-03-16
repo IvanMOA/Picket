@@ -1,13 +1,9 @@
 import express from "express";
-import { graphqlHTTP } from "express-graphql";
-import { rootValue } from "./graphql/RootValue";
-import { schema } from "./graphql/Schema";
 import { EnvironmentArranger } from "../shared/infrastructure/environment-arranger/EnvironmentArranger";
 import cors from "cors";
 import axios from "axios";
 import { firebaseProjectId } from "../shared/infrastructure/clients/Firebase";
 import { morganMiddleware } from "./middleware/morganMiddleware";
-import { logger } from "./logger/logger";
 import jwt from "jsonwebtoken";
 import jwtDecode from "jwt-decode";
 import { AdministratorsControllerV1 } from "./controllers/v1/AdministratorsControllerV1";

@@ -2,9 +2,9 @@ import { auth } from "../../../../shared/infrastructure/clients/Firebase";
 import { z } from "zod";
 import { Role } from "../../../users/domain/Role";
 import { Administrator } from "../../domain/Administrator";
-import { validateInput } from "../../../../shared/utils/validateInput";
 import { UseCase } from "../../../../shared/domain/UseCase";
 import { AdministratorsRepository } from "../../domain/AdministratorsRepository";
+import { validateInput } from "../../../../shared/domain/utils/validateInput";
 const registerAdministratorValidator = z.object({
   name: z.string().min(5).max(100),
   email: z.string().min(10).max(100).email(),

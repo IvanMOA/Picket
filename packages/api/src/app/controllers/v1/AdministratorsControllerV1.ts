@@ -13,19 +13,18 @@ export class AdministratorsControllerV1 extends BaseController {
     this.router = Router();
     this.router.post("/v1/administrators", this.create);
   }
-  private create = async (req: Request, res: Response) => {
-    const result = await this.registerAdministrator.safeRun({
-      name: req.body.name,
-      email: req.body.email,
-      dependencyId: req.body.dependency_id,
-      password: req.body.password,
-      confirmationPassword: req.body.confirmation_password,
-      role: req.body.role,
-    });
-    if (result instanceof Error) this.handleError(result, res);
-    else
+  private create = async (req: Request, res: Response) =>
+    this.wrapToHandleErrors(async () => {
+      const result = await this.registerAdministrator.run({
+        name: req.body.name,
+        email: req.body.email,
+        dependencyId: req.body.dependency_id,
+        password: req.body.password,
+        confirmationPassword: req.body.confirmation_password,
+        role: req.body.role,
+      });
       return res.status(201).json({
         administrator: result,
       });
-  };
+    }, res);
 }
