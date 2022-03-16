@@ -27,21 +27,21 @@ describe("Register visitor", () => {
             }`;
   it("Registers a visitor if one with its phone number does not exists yet", async () => {
     const res = await req()
-      .post("/graphql")
+      .post("/v1/administrators")
       .send({
         query,
         variables: {
           input: { phoneNumber: "8124337743", name: "Axel Ivan Morales" },
         },
       });
-    expect(res.body.data.registerVisitor.id).toBeDefined();
+    expect(res.body.administrator.id).toBeDefined();
   });
   it("Validates its input", async () => {
     const res = await req()
-      .post("/graphql")
+      .post("/v1/administrators")
       .send({ query, variables: { input: { phoneNumber: "", name: "" } } });
     console.log(res.body);
     expect(res.body.data.registerVisitor.errors.name).toBeDefined();
-    expect(res.body.data.registerVisitor.errors.phoneNumber).toBeDefined();
+    expect(res.body.errors.phoneNumber).toBeDefined();
   });
 });

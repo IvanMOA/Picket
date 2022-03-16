@@ -9,7 +9,7 @@
       <env name="FIREBASE_ACTIVE_EMULATORS" value="auth" />
     </envs>
     <scope-kind value="SUITE" />
-    <test-file value="$PROJECT_DIR$/packages/api/src/modules/administrators/resolvers/register-administrator/RegisterAdministrator.e2e-spec.ts" />
+    <test-file value="$PROJECT_DIR$/packages/api/tests/RegisterAdministrator.e2e-spec.ts" />
     <test-names>
       <test-name value="Register" />
     </test-names>

@@ -1,9 +1,29 @@
 <script lang="ts" setup>
 import AdminLayout from "@/layouts/AdminLayout/AdminLayout.vue";
-import { ElButton, ElTableColumn } from "element-plus";
+import { ElButton, ElTableColumn, ElDialog } from "element-plus";
 import EntityTable from "@/components/entity-table/EntityTable.vue";
 import { useLoggedInUser } from "@/stores/UserStore";
+import { ref } from "vue";
+import { AdministratorDTO } from "@picket/shared";
+import DeleteAdministratorForm from "@/pages/Administrators/DeleteAdministratorForm.vue";
+const isDialogOpen = ref(false);
+type AdministratorDialogAction = "UPDATE" | "DELETE";
+const dialogType = ref<AdministratorDialogAction>("UPDATE");
 const { user } = useLoggedInUser();
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const selectedAdministratorForModal = ref<AdministratorDTO | null>();
+const deleteAdministrator = async (a) => {
+  await sleep(1000);
+  console.log(a);
+};
+const openDialog = (
+  newDialogType: AdministratorDialogAction,
+  administrator: AdministratorDTO
+) => {
+  selectedAdministratorForModal.value = administrator;
+  isDialogOpen.value = true;
+  dialogType.value = newDialogType;
+};
 </script>
 <template>
   <AdminLayout>
@@ -35,7 +55,7 @@ const { user } = useLoggedInUser();
               <ElButton
                 size="small"
                 type="text"
-                @click.prevent="deleteRow(scope.$index)"
+                @click.prevent="() => openDialog('DELETE', scope.row)"
               >
                 Remove
               </ElButton>
@@ -43,6 +63,24 @@ const { user } = useLoggedInUser();
           </ElTableColumn>
         </template>
       </EntityTable>
+      <ElDialog v-model="isDialogOpen" width="30%">
+        <template #title>
+          <div class="">
+            {{
+              dialogType === "UPDATE"
+                ? "Actualizar información"
+                : "Eliminar administrador"
+            }}
+          </div>
+        </template>
+        <DeleteAdministratorForm
+          v-if="selectedAdministratorForModal"
+          :administratorDTO="selectedAdministratorForModal"
+        />
+        <template #footer>
+          <ElButton type="primary">Eliminar</ElButton>
+        </template>
+      </ElDialog>
     </div>
   </AdminLayout>
 </template>

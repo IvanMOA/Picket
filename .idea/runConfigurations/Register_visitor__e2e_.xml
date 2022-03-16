@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Register visitor mutation (e2e)" type="JavaScriptTestRunnerJest">
+  <configuration default="false" name="Register visitor (e2e)" type="JavaScriptTestRunnerJest">
     <config-file value="$PROJECT_DIR$/packages/api/jest.e2e-config.js" />
     <node-interpreter value="project" />
     <node-options value="" />

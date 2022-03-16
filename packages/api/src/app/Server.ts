@@ -10,24 +10,19 @@ import { morganMiddleware } from "./middleware/morganMiddleware";
 import { logger } from "./logger/logger";
 import jwt from "jsonwebtoken";
 import jwtDecode from "jwt-decode";
+import { AdministratorsControllerV1 } from "./controllers/v1/AdministratorsControllerV1";
+import { KnexAdministratorsRepository } from "../modules/administrators/infrastructure/KnexAdministratorsRepository";
 export class Server {
   public static create() {
     const app = express();
     app.use(cors());
     app.use(express.json());
     app.use(morganMiddleware);
-    app.use(
-      "/graphql",
-      graphqlHTTP({
-        schema,
-        rootValue,
-        graphiql: true,
-        customFormatErrorFn: (error) => {
-          logger.error(error);
-          return error;
-        },
-      })
+    const administratorsRepository = new KnexAdministratorsRepository();
+    const administratorsControllerV1 = new AdministratorsControllerV1(
+      administratorsRepository
     );
+    app.use(administratorsControllerV1.router);
     app.post("/protected/environment-arranger/clean-up", async (r_, res) => {
       await EnvironmentArranger.cleanUp().catch(console.log);
       res.send(200);

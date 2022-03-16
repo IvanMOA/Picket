@@ -1,14 +1,12 @@
-import { ZodObject } from "zod";
-import { ValidationError, validationError } from "../errors/ValidationError";
-export const validateInput = <InputType extends { __typename?: string }>(
-  schema: ZodObject<any>,
-  args: any,
-  __typename: InputType["__typename"]
-) => {
-  const validationResult = schema.safeParse(args?.input);
+import { ZodObject, ZodRawShape } from "zod";
+import { ValidationError } from "../errors/ValidationError";
+import { z } from "zod";
+export const validateInput = <InputType extends ZodRawShape>(
+  schema: ZodObject<InputType>,
+  args: any
+): z.infer<typeof schema> => {
+  const validationResult = schema.safeParse(args);
   if (!validationResult.success)
-    throw new ValidationError(
-      __typename,
-      validationError(validationResult.error).errors
-    );
+    throw new ValidationError(validationResult.error.formErrors.fieldErrors);
+  return validationResult.data;
 };
