@@ -46,4 +46,6 @@ export const esLocale = {
   could_not_create_dependency: "No se pudo crear la dependencia",
   could_not_delete_dependency: "No se pudo eliminar la dependencia",
   could_not_update_dependency: "No se pudo actualizar la dependencia",
+  goodbye: "Hasta luego",
+  logout_message: "Has cerrado sesión",
 };

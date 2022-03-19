@@ -18,8 +18,13 @@ let unsubscribeFn: Unsubscribe;
 watchEffect((onCleanup) => {
   const isOnlyPublicWhileUserIsLoggedIn = (route: RouteLocationNormalized) =>
     route.meta.authType === AuthType.ONLY_PUBLIC && user.value !== null;
+  const isPrivateWhileNotLoggedIn = (route: RouteLocationNormalized) =>
+    route.meta.authType === AuthType.PRIVATE && user.value === null;
   if (isOnlyPublicWhileUserIsLoggedIn(router.currentRoute.value)) {
     router.push({ name: "Dashboard" });
+  }
+  if (isPrivateWhileNotLoggedIn(router.currentRoute.value)) {
+    router.push({ name: "Login" });
   }
   const unregisterBeforeEachRouteGuard = router.beforeEach((to, from, next) => {
     if (
