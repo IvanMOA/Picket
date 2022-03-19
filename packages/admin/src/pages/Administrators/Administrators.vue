@@ -6,41 +6,52 @@ import { useLoggedInUser } from "@/stores/UserStore";
 import { ref } from "vue";
 import { AdministratorDTO } from "@picket/shared";
 import DeleteAdministratorForm from "@/pages/Administrators/DeleteAdministratorForm.vue";
+import { useI18n } from "vue-i18n";
+import CreateAdministratorForm from "@/pages/Administrators/CreateAdministratorForm.vue";
 const isDialogOpen = ref(false);
-type AdministratorDialogAction = "UPDATE" | "DELETE";
+type AdministratorDialogAction = "CREATE" | "UPDATE" | "DELETE";
 const dialogType = ref<AdministratorDialogAction>("UPDATE");
 const { user } = useLoggedInUser();
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const { t } = useI18n();
 const selectedAdministratorForModal = ref<AdministratorDTO | null>();
-const deleteAdministrator = async (a) => {
-  await sleep(1000);
-  console.log(a);
-};
 const openDialog = (
   newDialogType: AdministratorDialogAction,
-  administrator: AdministratorDTO
+  administrator?: AdministratorDTO
 ) => {
   selectedAdministratorForModal.value = administrator;
   isDialogOpen.value = true;
   dialogType.value = newDialogType;
 };
+const closeDialog = () => {
+  isDialogOpen.value = false;
+};
 </script>
 <template>
   <AdminLayout>
     <div class="shadow-md bg-white w-full h-full rounded-md">
-      <div class="px-6 py-3 border-b-2 border-gray-100">
-        <h1 class="mb-1 font-bold text-gray-500">
-          {{ $t("users_section_title") }}
-        </h1>
-        <p class="text-sm text-gray-400">
-          {{
-            $t(
-              user.role === "SUPERADMIN"
-                ? "users_section_superadmin_description"
-                : "users_section_admin_description"
-            )
-          }}
-        </p>
+      <div
+        class="px-6 py-3 border-b-2 border-gray-100 flex flex-row justify-between items-center"
+      >
+        <div>
+          <h1 class="mb-1 font-bold text-gray-500">
+            {{ t("users_section_title") }}
+          </h1>
+          <p class="text-sm text-gray-400">
+            {{
+              t(
+                user.role === "SUPERADMIN"
+                  ? "users_section_superadmin_description"
+                  : "users_section_admin_description"
+              )
+            }}
+          </p>
+        </div>
+        <ElButton
+          @click="openDialog('CREATE')"
+          data-testid="create-administrator-btn"
+          type="primary"
+          >{{ t("create") }}</ElButton
+        >
       </div>
       <EntityTable
         base-route="/users"
@@ -48,9 +59,9 @@ const openDialog = (
         fts-column-name="name"
       >
         <template v-slot:columns>
-          <ElTableColumn :label="$t('name')" prop="name" />
-          <ElTableColumn :label="$t('email')" prop="email" />
-          <ElTableColumn :label="$t('actions')">
+          <ElTableColumn :label="t('name')" prop="name" />
+          <ElTableColumn :label="t('email')" prop="email" />
+          <ElTableColumn :label="t('actions')">
             <template #default="scope">
               <ElButton
                 size="small"
@@ -66,20 +77,26 @@ const openDialog = (
       <ElDialog v-model="isDialogOpen" width="30%">
         <template #title>
           <div class="">
-            {{
-              dialogType === "UPDATE"
-                ? "Actualizar información"
-                : "Eliminar administrador"
-            }}
+            <h1 v-if="dialogType === 'CREATE'">
+              {{ t("create_administrator") }}
+            </h1>
+            <h1 v-if="dialogType === 'UPDATE'">
+              {{ t("update_administrator") }}
+            </h1>
+            <h1 v-if="dialogType === 'DELETE'">
+              {{ t("delete_administrator") }}
+            </h1>
           </div>
         </template>
         <DeleteAdministratorForm
-          v-if="selectedAdministratorForModal"
+          @submitted="closeDialog"
+          v-if="dialogType === 'DELETE'"
           :administratorDTO="selectedAdministratorForModal"
         />
-        <template #footer>
-          <ElButton type="primary">Eliminar</ElButton>
-        </template>
+        <CreateAdministratorForm
+          @submitted="closeDialog"
+          v-if="dialogType === 'CREATE'"
+        />
       </ElDialog>
     </div>
   </AdminLayout>

@@ -41,6 +41,7 @@ const { t } = useI18n();
           <AdminLayoutSidebarLink
             :icon="UserFilled"
             :name="t('users_section_title')"
+            data-testid="users-section-link"
             to="/users"
           />
           <AdminLayoutSidebarLink

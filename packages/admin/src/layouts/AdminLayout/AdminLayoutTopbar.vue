@@ -26,7 +26,7 @@ const logout = async () => {
     <div class="relative p-1 flex items-center w-full space-x-4 justify-end">
       <span class="w-1 h-8 rounded-lg bg-gray-200"> </span>
       <el-avatar> {{ user.email.slice(0, 2).toUpperCase() }}</el-avatar>
-      <el-dropdown trigger="click">
+      <el-dropdown data-testid="profile-btn" trigger="click">
         <button class="flex items-center text-gray-500 dark:text-white text-md">
           {{ user.email.split("@")[0].toUpperCase() }}
           <svg
@@ -44,7 +44,7 @@ const logout = async () => {
         </button>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item @click="logout">{{
+            <el-dropdown-item data-testid="logout-btn" @click="logout">{{
               t("logout")
             }}</el-dropdown-item>
           </el-dropdown-menu>

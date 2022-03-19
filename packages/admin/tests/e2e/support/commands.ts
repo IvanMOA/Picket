@@ -8,6 +8,10 @@ Cypress.Commands.add("login", (email, password) => {
   cy.testId("password-input").type(password);
   cy.testId("submit-btn").click();
 });
+Cypress.Commands.add("logout", () => {
+  cy.testId("profile-btn").click();
+  cy.testId("logout-btn").click();
+});
 Cypress.Commands.add("createDependency", (dependencyId, name) => {
   cy.testId("dependencies-link").click();
   cy.testId("create-dependency-btn").click();

@@ -18,15 +18,18 @@ export class AdministratorsSeeder {
      * @warning
      * Utilizar solo para propósitos de desarrollo
      */
-    await k("dependencies").insert({
-      dependency_id: "99991",
-      name: "Superadmins",
-    });
+    const dependency = await k("dependencies").insert(
+      {
+        dependency_id: "99991",
+        name: "Superadmins",
+      },
+      ["id"]
+    );
     await registerAdministrator.run({
       name: "Primer superadmin",
       email: "superadmin@picket.com",
       role: Role.SUPERADMIN,
-      dependencyId: "99991",
+      dependencyId: dependency[0].id,
       password: "superadmin",
       confirmationPassword: "superadmin",
     });
