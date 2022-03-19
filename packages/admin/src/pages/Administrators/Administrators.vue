@@ -67,8 +67,9 @@ const closeDialog = () => {
                 size="small"
                 type="text"
                 @click.prevent="() => openDialog('DELETE', scope.row)"
+                data-testid="delete-administrator-btn"
               >
-                Remove
+                {{ t("delete") }}
               </ElButton>
             </template>
           </ElTableColumn>
@@ -88,14 +89,14 @@ const closeDialog = () => {
             </h1>
           </div>
         </template>
+        <CreateAdministratorForm
+          @submitted="closeDialog"
+          v-if="dialogType === 'CREATE'"
+        />
         <DeleteAdministratorForm
           @submitted="closeDialog"
           v-if="dialogType === 'DELETE'"
           :administratorDTO="selectedAdministratorForModal"
-        />
-        <CreateAdministratorForm
-          @submitted="closeDialog"
-          v-if="dialogType === 'CREATE'"
         />
       </ElDialog>
     </div>

@@ -28,6 +28,11 @@ export const esLocale = {
       title: "Dependencia eliminada",
       message: "Se ha eliminado la dependencia",
     },
+    administrator: {
+      title: "Administrador eliminado",
+      message:
+        "Se ha eliminado al administrador, ya no podrá acceder a la plataforma",
+    },
   },
   created: {
     dependency: {

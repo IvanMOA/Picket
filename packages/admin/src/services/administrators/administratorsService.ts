@@ -17,4 +17,7 @@ export const administratorsService = {
       dependency_id: args.dependencyId,
     });
   },
+  delete: async (id: string) => {
+    await apiClient.delete(`/v1/administrators/${id}`);
+  },
 };

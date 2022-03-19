@@ -11,21 +11,39 @@ describe("Super admin login", async () => {
   });
   it("Creates a superadmin", () => {
     cy.login("superadmin@picket.com", "superadmin");
-    cy.testId("users-section-link").click();
-    cy.testId("create-administrator-btn").click();
     const email = "anadmin@gmail.com";
     const password = "123123";
-    cy.testId("name-input").type("Juan Garza Martínez");
-    cy.testId("email-input").type(email);
-    cy.testId("password-input").type(password);
-    cy.testId("confirmation-password-input").type(password);
-    cy.testId("dependency-select").click().type("{downArrow}{enter}");
-    cy.testId("role-select").click().type("{downArrow}{enter}");
-    cy.testId("submit-btn").click();
+    cy.createAdministrator({
+      name: "Juan Garza",
+      email,
+      password,
+      role: "Superadmin",
+      dependencyName: "Superadmins",
+    });
     cy.contains(esLocale.created.administrator.title);
     cy.contains("anadmin@gmail.com");
     cy.logout();
     cy.login(email, password);
     cy.url().should("contain", "dashboard");
+  });
+  it.only("Deletes a superadmin", () => {
+    cy.login("superadmin@picket.com", "superadmin");
+    const email = "anadmin@gmail.com";
+    const password = "123123";
+    cy.createAdministrator({
+      name: "Juan Garza",
+      email,
+      password,
+      role: "Superadmin",
+      dependencyName: "Superadmins",
+    });
+    cy.contains(esLocale.created.administrator.title);
+    cy.contains("anadmin@gmail.com");
+    cy.testId("delete-administrator-btn").eq(1).click();
+    cy.testId("submit-btn").click();
+    cy.should("not.contain", email);
+    cy.logout();
+    cy.login(email, password);
+    cy.url().should("contain", "login");
   });
 });

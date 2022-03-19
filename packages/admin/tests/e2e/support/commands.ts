@@ -19,6 +19,19 @@ Cypress.Commands.add("createDependency", (dependencyId, name) => {
   cy.testId("name-input").type(name);
   cy.testId("submit-btn").click();
 });
+Cypress.Commands.add("createAdministrator", (args) => {
+  cy.testId("users-section-link").click();
+  cy.testId("create-administrator-btn").click();
+  cy.testId("name-input").type(args.name);
+  cy.testId("email-input").type(args.email);
+  cy.testId("password-input").type(args.password);
+  cy.testId("confirmation-password-input").type(args.password);
+  cy.testId("role-select").click();
+  cy.contains(args.role).click();
+  cy.testId("dependency-select").click();
+  cy.contains(args.dependencyName).click();
+  cy.testId("submit-btn").click();
+});
 Cypress.on("uncaught:exception", (err, runnable) => {
   return false;
 });
