@@ -1,3 +1,3 @@
-export abstract class UseCase<Req, Res> {
-  protected abstract run(req: Req): Promise<Res>;
+export interface UseCase<Req, Res> {
+  run(req: Req): Promise<Res>;
 }

@@ -22,10 +22,8 @@ type Response = {
   name: string;
   role: string;
 };
-export class RegisterAdministrator extends UseCase<Request, Response> {
-  constructor(private administratorsRepository: AdministratorsRepository) {
-    super();
-  }
+export class RegisterAdministrator implements UseCase<Request, Response> {
+  constructor(private administratorsRepository: AdministratorsRepository) {}
   public async run(_req: Request): Promise<Response> {
     const req = validateInput(registerAdministratorValidator, _req);
     const administrator = new Administrator({

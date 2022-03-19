@@ -11,7 +11,7 @@ afterAll(async () => {
   await EnvironmentArranger.disconnect();
 });
 describe("Register administrator", () => {
-  const app = Server.create();
+  const app = Server.bootstrap();
   const req = () => _request(app);
   it("Registers an administrator if one with its email does not exists yet", async () => {
     const password = faker.internet.password();

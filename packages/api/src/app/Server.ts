@@ -8,17 +8,22 @@ import jwt from "jsonwebtoken";
 import jwtDecode from "jwt-decode";
 import { AdministratorsControllerV1 } from "./controllers/v1/AdministratorsControllerV1";
 import { KnexAdministratorsRepository } from "../modules/administrators/infrastructure/KnexAdministratorsRepository";
+import { KnexVisitorsRepository } from "../modules/visitors/infrastructure/KnexVisitorsRepository";
+import { VisitorsControllerV1 } from "@app/controllers/v1/VisitorsControllerV1";
 export class Server {
-  public static create() {
+  public static bootstrap() {
     const app = express();
     app.use(cors());
     app.use(express.json());
     app.use(morganMiddleware);
     const administratorsRepository = new KnexAdministratorsRepository();
+    const visitorsRepository = new KnexVisitorsRepository();
     const administratorsControllerV1 = new AdministratorsControllerV1(
       administratorsRepository
     );
+    const visitorsControllerV1 = new VisitorsControllerV1(visitorsRepository);
     app.use(administratorsControllerV1.router);
+    app.use(visitorsControllerV1.router);
     app.post("/protected/environment-arranger/clean-up", async (r_, res) => {
       await EnvironmentArranger.cleanUp().catch(console.log);
       res.send(200);
