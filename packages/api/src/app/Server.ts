@@ -9,7 +9,7 @@ import jwtDecode from "jwt-decode";
 import { AdministratorsControllerV1 } from "./controllers/v1/AdministratorsControllerV1";
 import { KnexAdministratorsRepository } from "../modules/administrators/infrastructure/KnexAdministratorsRepository";
 import { KnexVisitorsRepository } from "../modules/visitors/infrastructure/KnexVisitorsRepository";
-import { VisitorsControllerV1 } from "@app/controllers/v1/VisitorsControllerV1";
+import { VisitorsControllerV1 } from "./controllers/v1/VisitorsControllerV1";
 export class Server {
   public static bootstrap() {
     const app = express();

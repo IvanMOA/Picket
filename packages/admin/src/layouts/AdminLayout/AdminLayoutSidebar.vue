@@ -1,10 +1,17 @@
 <script lang="ts" setup>
 import AdminLayoutSidebarLink from "@/layouts/AdminLayout/AdminLayourSidebarLink.vue";
-import { CaretLeft, Histogram, UserFilled } from "@element-plus/icons-vue";
+import {
+  CaretLeft,
+  Histogram,
+  UserFilled,
+  School,
+} from "@element-plus/icons-vue";
 import { ElButton } from "element-plus";
+import { useI18n } from "vue-i18n";
 const props = defineProps<{
   isOpen: boolean;
 }>();
+const { t } = useI18n();
 </script>
 
 <template>
@@ -28,13 +35,19 @@ const props = defineProps<{
         <div>
           <AdminLayoutSidebarLink
             :icon="Histogram"
-            :name="$t('statistics_section_title')"
+            :name="t('statistics_section_title')"
             to="/dashboard"
           />
           <AdminLayoutSidebarLink
             :icon="UserFilled"
-            :name="$t('users_section_title')"
+            :name="t('users_section_title')"
             to="/users"
+          />
+          <AdminLayoutSidebarLink
+            :icon="School"
+            :name="t('dependencies_section_title')"
+            data-testid="dependencies-link"
+            to="/dependencies"
           />
         </div>
       </nav>

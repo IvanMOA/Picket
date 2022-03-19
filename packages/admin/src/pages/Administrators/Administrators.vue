@@ -84,19 +84,3 @@ const openDialog = (
     </div>
   </AdminLayout>
 </template>
-<style>
-.scale-out-enter-active {
-  transition: all 0.2s cubic-bezier(0.18, 0.87, 0.51, 1.04);
-  transform: scale(1);
-}
-
-.scale-out-leave-active {
-  transition: all 0.4s cubic-bezier(0.18, 0.87, 0.51, 1.04);
-  transform: scale(1);
-}
-
-.scale-out-enter-from,
-.scale-out-leave-to {
-  transform: scale(0.7);
-}
-</style>

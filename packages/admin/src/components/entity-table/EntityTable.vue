@@ -13,6 +13,7 @@ import {
 } from "element-plus";
 import { Search } from "@element-plus/icons-vue";
 import Spinner from "@/components/loaders/Spinner.vue";
+import { useI18n } from "vue-i18n";
 const props = defineProps<{
   entityRoute: string;
   ftsColumnName: string;
@@ -20,6 +21,7 @@ const props = defineProps<{
 }>();
 const router = useRouter();
 const queryClient = useQueryClient();
+const { t } = useI18n();
 const defaultData = new Array(10).fill({
   email: "-",
   name: "-",
@@ -84,7 +86,7 @@ onMounted(() => {
   <div class="px-4 mt-4 mb-1 w-1/3 ml-auto">
     <ElInput
       v-model="searchTerm"
-      :placeholder="$t('search')"
+      :placeholder="t('search')"
       class="input-with-select"
     >
       <template #prepend>

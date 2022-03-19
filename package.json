@@ -8,7 +8,8 @@
     "packages/*"
   ],
   "scripts": {
-    "emulators": "firebase emulators:start --project demo-events"
+    "emulators": "firebase emulators:start --project demo-events",
+    "update:linked_dependencies": "lerna run lib && lerna bootstrap"
   },
   "dependencies": {
     "prettier": "^2.5.1"

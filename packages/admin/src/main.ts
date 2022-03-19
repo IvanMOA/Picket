@@ -1,4 +1,4 @@
-import { createApp } from "vue";
+import { createApp, ComponentCustomProperties } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import { createHead } from "@vueuse/head";
@@ -6,16 +6,10 @@ import { createI18n } from "vue-i18n";
 import "./assets/styles/index.postcss";
 import "./assets/styles/tailwindcss-preflight.css";
 import axios from "axios";
-import { esLocale } from "@/locales/es";
 import { createPinia } from "pinia";
 import { VueQueryPlugin } from "vue-query";
+import { i18n } from "@/config/i18n";
 axios.defaults.baseURL = "http://localhost:4004";
-const i18n = createI18n({
-  locale: "es",
-  messages: {
-    es: esLocale,
-  },
-});
 const head = createHead();
 const app = createApp(App);
 app.use(VueQueryPlugin);

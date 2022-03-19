@@ -19,7 +19,7 @@ export class AdministratorsSeeder {
      * Utilizar solo para propósitos de desarrollo
      */
     await k("dependencies").insert({
-      id: "99991",
+      dependency_id: "99991",
       name: "Superadmins",
     });
     await registerAdministrator.run({

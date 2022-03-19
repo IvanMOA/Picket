@@ -15,17 +15,20 @@ describe("Register administrator", () => {
   const req = () => _request(app);
   it("Registers an administrator if one with its email does not exists yet", async () => {
     const password = faker.internet.password();
-    await k("dependencies").insert({
-      id: "23161",
-      name: "Superadmins dependency",
-    });
+    const a = await k("dependencies").insert(
+      {
+        dependency_id: "23161",
+        name: "Superadmins dependency",
+      },
+      ["id"]
+    );
     const res = await req().post("/v1/administrators").send({
       name: faker.name.findName(),
       email: faker.internet.email(),
       password: password,
       confirmation_password: password,
       role: Role.ADMIN,
-      dependency_id: "23161",
+      dependency_id: a[0].id,
     });
     expect(res.status).toBe(201);
     expect(res.body.administrator.id).toBeDefined();
