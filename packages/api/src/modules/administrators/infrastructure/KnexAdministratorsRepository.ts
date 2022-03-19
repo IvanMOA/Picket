@@ -14,6 +14,19 @@ export class KnexAdministratorsRepository implements AdministratorsRepository {
     // .merge(["name"])
     // .returning("*");
   }
+  async find(id: string): Promise<Administrator | null> {
+    const row = await k("administrators").first().where({ id });
+    if (!row) return null;
+    return new Administrator(
+      {
+        name: row.name,
+        email: row.email,
+        role: row.role,
+        dependencyId: row.dependencyId,
+      },
+      row.id
+    );
+  }
   delete(administrator: Administrator): Promise<void> {
     return Promise.resolve(undefined);
   }
