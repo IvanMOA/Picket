@@ -46,4 +46,30 @@ describe("Super admin login", async () => {
     cy.login(email, password);
     cy.url().should("contain", "login");
   });
+  it.only("Updates a superadmin", () => {
+    cy.login("superadmin@picket.com", "superadmin");
+    const email = "anadmin@gmail.com";
+    const password = "123123";
+    cy.createAdministrator({
+      name: "Juan Garza",
+      email,
+      password,
+      role: "Superadmin",
+      dependencyName: "Superadmins",
+    });
+    const newEmail = "juangarza.gtz@gmail.com";
+    const newName = "Juan Pedro Gutierrez";
+    const newRole = "Guardia";
+    cy.testId("edit-administrator-btn").eq(1).click();
+    cy.testId("email-input").clear().type(newEmail);
+    cy.testId("name-input").clear().type(newName);
+    cy.testId("role-select").click();
+    cy.contains(newRole).click();
+    cy.testId("submit-btn").click();
+    cy.should("not.contain", email);
+    cy.should("contain", newEmail);
+    cy.logout();
+    cy.login(email, password);
+    cy.url().should("contain", "login");
+  });
 });

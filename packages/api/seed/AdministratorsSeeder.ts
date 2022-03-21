@@ -11,7 +11,6 @@ const registerAdministrator = new RegisterAdministrator(
 export class AdministratorsSeeder {
   static async run() {
     await this.createSuperadmin();
-    await this.createRandomAdministrators();
   }
   private static async createSuperadmin() {
     /**
@@ -34,6 +33,7 @@ export class AdministratorsSeeder {
       confirmationPassword: "superadmin",
     });
   }
+  public static create = registerAdministrator.run;
   private static async createRandomAdministrators() {
     await Promise.all(
       range(0, 120).map(async () => {

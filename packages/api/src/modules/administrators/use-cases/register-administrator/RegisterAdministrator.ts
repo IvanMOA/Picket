@@ -10,7 +10,7 @@ const registerAdministratorValidator = z.object({
   email: z.string().min(10).max(100).email(),
   password: z.string().min(6).max(100),
   confirmationPassword: z.string().min(6).max(100),
-  role: z.enum([Role.ADMIN, Role.VISITOR, Role.SUPERADMIN]),
+  role: z.enum([Role.ADMIN, Role.VISITOR, Role.SUPERADMIN, Role.GUARD]),
   dependencyId: z.string(),
 });
 type Request = Record<
@@ -24,7 +24,7 @@ type Response = {
 };
 export class RegisterAdministrator implements UseCase<Request, Response> {
   constructor(private administratorsRepository: AdministratorsRepository) {}
-  public async run(_req: Request): Promise<Response> {
+  public run = async (_req: Request): Promise<Response> => {
     const req = validateInput(registerAdministratorValidator, _req);
     const administrator = new Administrator({
       name: req.name,
@@ -48,5 +48,5 @@ export class RegisterAdministrator implements UseCase<Request, Response> {
       name: administrator.name,
       role: administrator.role,
     };
-  }
+  };
 }

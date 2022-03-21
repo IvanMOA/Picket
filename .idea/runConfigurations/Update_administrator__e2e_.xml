@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Delete administrator (e2e)" type="JavaScriptTestRunnerJest">
+  <configuration default="false" name="Update administrator (e2e)" type="JavaScriptTestRunnerJest">
     <config-file value="$PROJECT_DIR$/packages/api/jest.e2e-config.js" />
     <node-interpreter value="project" />
     <node-options value="" />
@@ -9,7 +9,7 @@
       <env name="FIREBASE_ACTIVE_EMULATORS" value="auth" />
     </envs>
     <scope-kind value="SUITE" />
-    <test-file value="$PROJECT_DIR$/packages/api/tests/DeleteAdministrator.e2e-spec.ts" />
+    <test-file value="$PROJECT_DIR$/packages/api/tests/UpdateAdministrator.e2e-spec.ts" />
     <test-names>
       <test-name value="Delete" />
     </test-names>

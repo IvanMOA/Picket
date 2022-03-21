@@ -3,6 +3,7 @@ import { camelCaseToSnakeCase } from "@picket/shared";
 import { ValidationError } from "../../shared/domain/errors/ValidationError";
 import { logger } from "../../shared/infrastructure/logger/logger";
 import { NotFoundError } from "../../shared/domain/errors/NotFoundError";
+import { ForbiddenActionError } from "../../shared/domain/errors/ForbiddenActionError";
 export abstract class BaseController {
   protected async wrapToHandleErrors(
     wrapedFn: () => Promise<any>,
@@ -25,6 +26,10 @@ export abstract class BaseController {
       }
       if (error instanceof NotFoundError)
         return res.status(404).json({
+          message: error.message,
+        });
+      if (error instanceof ForbiddenActionError)
+        return res.status(403).json({
           message: error.message,
         });
       return res.status(500).json({

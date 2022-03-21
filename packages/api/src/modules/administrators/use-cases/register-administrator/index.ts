@@ -1,1 +1,1 @@
-export * from "./makeRegisterAdministrator";
+export * from "./RegisterAdministrator";

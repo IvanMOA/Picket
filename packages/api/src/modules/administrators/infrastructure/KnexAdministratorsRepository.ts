@@ -3,16 +3,21 @@ import { k } from "../../../shared/infrastructure/clients/Knex";
 import { AdministratorsRepository } from "../domain/AdministratorsRepository";
 export class KnexAdministratorsRepository implements AdministratorsRepository {
   async save(administrator: Administrator): Promise<void> {
-    await k("administrators").insert({
-      id: administrator.id,
-      name: administrator.name,
-      email: administrator.email,
-      role: administrator.role,
-      dependency_id: administrator.dependencyId,
-    });
-    // .onConflict()
-    // .merge(["name"])
-    // .returning("*");
+    await k("administrators")
+      .insert({
+        id: administrator.id,
+        name: administrator.name,
+        email: administrator.email,
+        role: administrator.role,
+        dependency_id: administrator.dependencyId,
+      })
+      .onConflict("id")
+      .merge({
+        email: administrator.email,
+        name: administrator.name,
+        role: administrator.role,
+        dependency_id: administrator.dependencyId,
+      });
   }
   async find(id: string): Promise<Administrator | null> {
     const row = await k("administrators").first().where({ id });
