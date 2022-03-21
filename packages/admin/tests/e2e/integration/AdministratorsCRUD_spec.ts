@@ -60,8 +60,12 @@ describe("Super admin login", async () => {
     const newEmail = "juangarza.gtz@gmail.com";
     const newName = "Juan Pedro Gutierrez";
     const newRole = "Administrador";
-    cy.testId("update-administrator-btn").should("have.length", 2);
-    cy.testId("update-administrator-btn", { timeout: 10000 }).eq(1).click();
+    cy.get("table").should("contain", email);
+    cy.contains("td", email)
+      .parent()
+      .within(() => {
+        cy.testId("update-administrator-btn").click();
+      });
     cy.testId("email-input").clear().type(newEmail);
     cy.testId("name-input").clear().type(newName);
     cy.testId("role-select").click();

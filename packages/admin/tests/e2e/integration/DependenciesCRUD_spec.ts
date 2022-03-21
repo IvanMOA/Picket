@@ -12,28 +12,28 @@ describe("Super admin login", async () => {
   });
   it("Creates a dependency", () => {
     cy.login("superadmin@picket.com", "superadmin");
-    const dependencyName = "Facultad de Ingeniería Mecánica y Eléctrica";
-    cy.createDependency("23161", dependencyName);
+    const dependencyName = "Facultad de Ingeniería Mecánica y Eléctrica - CEC";
+    cy.createDependency("231611", dependencyName);
     cy.contains(dependencyName);
     cy.findByRole("alert").contains(esLocale.created.dependency.title);
   });
   it("Deletes a dependency", () => {
     cy.login("superadmin@picket.com", "superadmin");
-    const dependencyName = "Facultad de Ingeniería Mecánica y Eléctrica";
-    cy.createDependency("23161", dependencyName);
-    cy.testId("delete-dependency-btn").eq(1).click();
+    const dependencyName = "Facultad de Ingeniería Mecánica y Eléctrica - CEC";
+    cy.createDependency("231611", dependencyName);
+    cy.contains("td", dependencyName)
+      .parent()
+      .within(() => {
+        cy.testId("delete-dependency-btn").click();
+      });
     cy.testId("submit-btn").click();
-    cy.testId("delete-dependency-btn", { timeout: 10000 }).should(
-      "have.length",
-      1
-    );
     cy.should("not.contain", dependencyName);
     cy.contains(esLocale.deleted.dependency.title);
   });
   it("Updates a dependency", () => {
     cy.login("superadmin@picket.com", "superadmin");
-    const dependencyName = "Facultad de Ingeniería Mecánica y Eléctrica";
-    cy.createDependency("23161", dependencyName);
+    const dependencyName = "Facultad de Ingeniería Mecánica y Eléctrica - CEC";
+    cy.createDependency("231611", dependencyName);
     cy.testId("edit-dependency-btn", { timeout: 10000 }).eq(1).click();
     const newDependencyName = "Facultad de Ciencias de la Comunicación";
     cy.testId("name-input").clear().type(newDependencyName);

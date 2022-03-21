@@ -17,10 +17,17 @@ export class AdministratorsSeeder {
      * @warning
      * Utilizar solo para propósitos de desarrollo
      */
-    const dependency = await k("dependencies").insert(
+    const superadminsDependency = await k("dependencies").insert(
       {
         dependency_id: "99991",
         name: "Superadmins",
+      },
+      ["id"]
+    );
+    const fimeDependency = await k("dependencies").insert(
+      {
+        dependency_id: "23161",
+        name: "Facultad de Ingeniería Mecánica y Eléctrica",
       },
       ["id"]
     );
@@ -28,11 +35,20 @@ export class AdministratorsSeeder {
       name: "Primer superadmin",
       email: "superadmin@picket.com",
       role: Role.SUPERADMIN,
-      dependencyId: dependency[0].id,
+      dependencyId: superadminsDependency[0].id,
       password: "superadmin",
       confirmationPassword: "superadmin",
     });
+    await registerAdministrator.run({
+      name: "Axel Morales",
+      email: "axel.moraleso@uanl.mx",
+      role: Role.ADMIN,
+      dependencyId: fimeDependency[0].id,
+      password: "123123",
+      confirmationPassword: "123123",
+    });
   }
+
   public static create = registerAdministrator.run;
   private static async createRandomAdministrators() {
     await Promise.all(
