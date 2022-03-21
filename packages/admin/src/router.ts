@@ -4,6 +4,7 @@ import Administrators from "@/pages/Administrators/Administrators.vue";
 import About from "@/pages/About/About.vue";
 import Login from "@/pages/Login/Login.vue";
 import Dependencies from "@/pages/Dependencies/Dependencies.vue";
+import Places from "@/pages/Places/Places.vue";
 export enum AuthType {
   "PUBLIC" = "PUBLIC",
   "PRIVATE" = "PRIVATE",
@@ -36,6 +37,14 @@ const router = createRouter({
       path: "/dependencies",
       component: Dependencies,
       name: "Dependencies",
+      meta: {
+        authType: AuthType.PRIVATE,
+      },
+    },
+    {
+      path: "/places",
+      component: Places,
+      name: "Places",
       meta: {
         authType: AuthType.PRIVATE,
       },

@@ -14,6 +14,12 @@ export const esLocale = {
   dependencies_section_title: "Dependencias",
   users_section_superadmin_description: "Usuarios de todas las dependencias",
   users_section_admin_description: "Usuarios de tu dependencia",
+  places_section_title: "Lugares",
+  places_section_description:
+    "Administra los lugares en donde se puede dar un evento",
+  address: "Dirección",
+  latitude: "Latitud",
+  longitude: "Longitud",
   dependencies_section_description:
     "Maneja las dependencias que pueden crear eventos",
   dependency_id: "Id de dependencia",
@@ -21,6 +27,10 @@ export const esLocale = {
     dependency: {
       title: "Dependencia actualizada",
       message: "Se han actualizado los datos de la dependencia",
+    },
+    place: {
+      title: "Lugar actualizado",
+      message: "Se ha actualizado la información del lugar",
     },
   },
   deleted: {
@@ -33,6 +43,10 @@ export const esLocale = {
       message:
         "Se ha eliminado al administrador, ya no podrá acceder a la plataforma",
     },
+    place: {
+      title: "Lugar eliminado",
+      message: "Se ha eliminado el lugar",
+    },
   },
   created: {
     dependency: {
@@ -43,6 +57,10 @@ export const esLocale = {
       title: "Administrador creado",
       message:
         "Se ha creado un nuevo administrador, ahora puede iniciar sesión",
+    },
+    place: {
+      title: "Lugar creado",
+      message: "Se ha creado un nuevo lugar",
     },
   },
   role: "Rol",
@@ -68,4 +86,12 @@ export const esLocale = {
   password: "Contraseña",
   confirmation_password: "Confirmar contraseña",
   select_dependency: "Selecciona la dependencia",
+  create_place: "Crear lugar",
+  delete_place: "Eliminar lugar",
+  update_place: "Actualizar lugar",
+  select_file: "Seleccionar svg",
+  selected_svg: "Svg seleccionado",
+  see_svg: "Ver svg",
+  zones: "Zonas",
+  add_zone: "Agregar zona",
 };

@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$/packages/api/database/policies/administrators_policy.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/packages/api/database/policies/dependencies_policy.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/packages/api/database/setup.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/packages/api/migrations/20220129000244_create_administrators_table.ts" dialect="GenericSQL" />
   </component>
 </project>

@@ -102,7 +102,7 @@ onMounted(() => {
       <Spinner primary />
     </div>
     <ElTable
-      :cell-class-name="isFetching && 'opacity-40'"
+      :cell-class-name="isFetching ? 'opacity-40' : ''"
       :data="isFetching && !data?.entities ? defaultData : data.entities"
       border
       class="relative"

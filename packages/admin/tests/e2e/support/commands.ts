@@ -13,7 +13,7 @@ Cypress.Commands.add("logout", () => {
   cy.testId("logout-btn").click();
 });
 Cypress.Commands.add("createDependency", (dependencyId, name) => {
-  cy.testId("dependencies-link").click();
+  cy.testId("dependencies-section-link").click();
   cy.testId("create-dependency-btn").click();
   cy.testId("dependency-id-input").type(dependencyId);
   cy.testId("name-input").type(name);

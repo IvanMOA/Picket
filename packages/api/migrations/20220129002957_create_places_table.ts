@@ -1,15 +1,26 @@
 import { Knex } from "knex";
 export async function up(knex: Knex): Promise<void> {
-  return knex.schema.createTable("places", (t) => {
+  await knex.schema.createTable("places", (t) => {
     t.uuid("id").unique().defaultTo(knex.raw("gen_random_uuid()"));
     t.string("name");
     t.string("address");
-    t.string("map_image_url");
+    t.string("sections_svg_filename");
     t.string("latitude");
     t.string("longitude");
-    t.timestamp("created_at", { useTz: true });
-    t.timestamp("updated_at", { useTz: true });
+    t.json("zones_template");
+    t.timestamp("created_at", { useTz: true }).defaultTo(knex.fn.now());
+    t.timestamp("updated_at", { useTz: true }).defaultTo(knex.fn.now());
   });
+  await knex.raw(`
+    alter table places enable row level security;
+    create policy places_policy on places
+      using (current_setting('request.jwt.claim.role', true) = 'superadmin')
+      with check (current_setting('request.jwt.claim.role', true) = 'superadmin');
+    grant select on places to superadmin;
+    grant insert on places to superadmin;
+    grant update on places to superadmin;
+    grant delete on places to superadmin;
+    `);
 }
 export async function down(knex: Knex): Promise<void> {
   return knex.schema.dropTable("places");

@@ -10,6 +10,8 @@ import { AdministratorsControllerV1 } from "./controllers/v1/AdministratorsContr
 import { KnexAdministratorsRepository } from "../modules/administrators/infrastructure/KnexAdministratorsRepository";
 import { KnexVisitorsRepository } from "../modules/visitors/infrastructure/KnexVisitorsRepository";
 import { VisitorsControllerV1 } from "./controllers/v1/VisitorsControllerV1";
+import { PlacesControllerV1 } from "@app/controllers/v1/PlacesControllerV1";
+import path from "path";
 export class Server {
   public static bootstrap() {
     const app = express();
@@ -22,8 +24,15 @@ export class Server {
       administratorsRepository
     );
     const visitorsControllerV1 = new VisitorsControllerV1(visitorsRepository);
+    const placesControllerV1 = new PlacesControllerV1();
     app.use(administratorsControllerV1.router);
     app.use(visitorsControllerV1.router);
+    app.use(placesControllerV1.router);
+    console.log(path.join(__dirname, "..", "..", "storage"));
+    app.use(
+      "/storage",
+      express.static(path.join(__dirname, "..", "..", "storage"))
+    );
     app.post("/protected/environment-arranger/clean-up", async (r_, res) => {
       await EnvironmentArranger.cleanUp().catch(console.log);
       res.send(200);

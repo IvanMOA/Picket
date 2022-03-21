@@ -7,8 +7,8 @@ export async function up(knex: Knex): Promise<void> {
     t.integer("tickets_per_person");
     t.string("description");
     t.timestamp("starts_at");
-    t.timestamp("created_at", { useTz: true });
-    t.timestamp("updated_at", { useTz: true });
+    t.timestamp("created_at", { useTz: true }).defaultTo(knex.fn.now());
+    t.timestamp("updated_at", { useTz: true }).defaultTo(knex.fn.now());
   });
 }
 export async function down(knex: Knex): Promise<void> {

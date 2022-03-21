@@ -10,8 +10,8 @@ export async function up(knex: Knex): Promise<void> {
       .onDelete("CASCADE");
     t.string("name");
     t.boolean("active");
-    t.timestamp("created_at", { useTz: true });
-    t.timestamp("updated_at", { useTz: true });
+    t.timestamp("created_at", { useTz: true }).defaultTo(knex.fn.now());
+    t.timestamp("updated_at", { useTz: true }).defaultTo(knex.fn.now());
   });
 }
 export async function down(knex: Knex): Promise<void> {

@@ -3,15 +3,19 @@ import AdminLayoutSidebarLink from "@/layouts/AdminLayout/AdminLayourSidebarLink
 import {
   CaretLeft,
   Histogram,
-  UserFilled,
+  User,
   School,
+  Star,
+  Place,
 } from "@element-plus/icons-vue";
 import { ElButton } from "element-plus";
 import { useI18n } from "vue-i18n";
+import { useLoggedInUser } from "@/stores/UserStore";
 const props = defineProps<{
   isOpen: boolean;
 }>();
 const { t } = useI18n();
+const { user } = useLoggedInUser();
 </script>
 
 <template>
@@ -36,19 +40,35 @@ const { t } = useI18n();
           <AdminLayoutSidebarLink
             :icon="Histogram"
             :name="t('statistics_section_title')"
+            data-testid="statistics-section-link"
             to="/dashboard"
           />
           <AdminLayoutSidebarLink
-            :icon="UserFilled"
+            :icon="User"
             :name="t('users_section_title')"
             data-testid="users-section-link"
             to="/users"
           />
           <AdminLayoutSidebarLink
+            v-if="user.role === 'superadmin'"
             :icon="School"
             :name="t('dependencies_section_title')"
-            data-testid="dependencies-link"
+            data-testid="dependencies-section-link"
             to="/dependencies"
+          />
+          <AdminLayoutSidebarLink
+            v-if="user.role === 'admin'"
+            :icon="Star"
+            :name="t('events_section_title')"
+            data-testid="events-section-link"
+            to="/events"
+          />
+          <AdminLayoutSidebarLink
+            v-if="user.role === 'superadmin'"
+            :icon="Place"
+            :name="t('places_section_title')"
+            data-testid="places-section-link"
+            to="/places"
           />
         </div>
       </nav>
