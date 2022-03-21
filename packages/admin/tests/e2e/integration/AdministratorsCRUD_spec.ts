@@ -26,7 +26,7 @@ describe("Super admin login", async () => {
     cy.login(email, password);
     cy.url().should("contain", "dashboard");
   });
-  it.only("Deletes a superadmin", () => {
+  it("Deletes a superadmin", () => {
     cy.login("superadmin@picket.com", "superadmin");
     const email = "anadmin@gmail.com";
     const password = "123123";
@@ -54,22 +54,26 @@ describe("Super admin login", async () => {
       name: "Juan Garza",
       email,
       password,
-      role: "Superadmin",
+      role: "Guardia",
       dependencyName: "Superadmins",
     });
     const newEmail = "juangarza.gtz@gmail.com";
     const newName = "Juan Pedro Gutierrez";
-    const newRole = "Guardia";
-    cy.testId("edit-administrator-btn").eq(1).click();
+    const newRole = "Administrador";
+    cy.testId("update-administrator-btn").should("have.length", 2);
+    cy.testId("update-administrator-btn", { timeout: 10000 }).eq(1).click();
     cy.testId("email-input").clear().type(newEmail);
     cy.testId("name-input").clear().type(newName);
     cy.testId("role-select").click();
     cy.contains(newRole).click();
     cy.testId("submit-btn").click();
-    cy.should("not.contain", email);
-    cy.should("contain", newEmail);
+    cy.get("table").should("not.contain", email).should("contain", newEmail);
     cy.logout();
     cy.login(email, password);
     cy.url().should("contain", "login");
+    cy.login(newEmail, password);
+    cy.url().should("contain", "dashboard");
+    cy.testId("users-section-link").click();
+    cy.get("table").should("contain", newEmail);
   });
 });

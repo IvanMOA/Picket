@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { User } from "firebase/auth";
-import { Ref } from "vue";
+import { User as FirebaseAuthUser } from "firebase/auth";
+type User = FirebaseAuthUser & { role: string; dependencyId: string };
 type UserStoreState = {
   user: User | null;
 };

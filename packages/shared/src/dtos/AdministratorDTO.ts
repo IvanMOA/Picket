@@ -3,5 +3,5 @@ export type AdministratorDTO = {
   name: string;
   role: string;
   email: string;
-  dependencyId: string;
+  dependency_id: string;
 };

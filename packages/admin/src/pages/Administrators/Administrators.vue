@@ -8,6 +8,7 @@ import { AdministratorDTO } from "@picket/shared";
 import DeleteAdministratorForm from "@/pages/Administrators/DeleteAdministratorForm.vue";
 import { useI18n } from "vue-i18n";
 import CreateAdministratorForm from "@/pages/Administrators/CreateAdministratorForm.vue";
+import UpdateAdministratorForm from "@/pages/Administrators/UpdateAdministratorForm.vue";
 const isDialogOpen = ref(false);
 type AdministratorDialogAction = "CREATE" | "UPDATE" | "DELETE";
 const dialogType = ref<AdministratorDialogAction>("UPDATE");
@@ -71,6 +72,14 @@ const closeDialog = () => {
               >
                 {{ t("delete") }}
               </ElButton>
+              <ElButton
+                size="small"
+                type="text"
+                @click.prevent="() => openDialog('UPDATE', scope.row)"
+                data-testid="update-administrator-btn"
+              >
+                {{ t("update") }}
+              </ElButton>
             </template>
           </ElTableColumn>
         </template>
@@ -96,6 +105,11 @@ const closeDialog = () => {
         <DeleteAdministratorForm
           @submitted="closeDialog"
           v-if="dialogType === 'DELETE'"
+          :administratorDTO="selectedAdministratorForModal"
+        />
+        <UpdateAdministratorForm
+          @submitted="closeDialog"
+          v-if="dialogType === 'UPDATE'"
           :administratorDTO="selectedAdministratorForModal"
         />
       </ElDialog>

@@ -1,4 +1,5 @@
 import { apiClient } from "@/clients/apiClient";
+import { AdministratorDTO } from "@picket/shared";
 export const administratorsService = {
   create: async (args: {
     email: string;
@@ -19,5 +20,11 @@ export const administratorsService = {
   },
   delete: async (id: string) => {
     await apiClient.delete(`/v1/administrators/${id}`);
+  },
+  update: async (administratorDTO: AdministratorDTO) => {
+    await apiClient.patch(
+      `/v1/administrators/${administratorDTO.id}`,
+      administratorDTO
+    );
   },
 };

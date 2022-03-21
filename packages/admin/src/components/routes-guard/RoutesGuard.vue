@@ -10,6 +10,7 @@ import { useUserStore } from "@/stores/UserStore";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import { postgrestClient } from "@/clients/postgrestClient";
+import { apiClient } from "@/clients/apiClient";
 const user = ref<User | null>(null);
 const loadingUser = ref(true);
 const router = useRouter();
@@ -55,6 +56,7 @@ onMounted(async () => {
           )
         ).data.jwt
       }`;
+      apiClient.defaults.headers.common.Authorization = `Bearer ${await _user.getIdToken()}`;
     }
     loadingUser.value = false;
     user.value = _user;

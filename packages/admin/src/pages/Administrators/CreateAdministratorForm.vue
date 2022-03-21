@@ -13,6 +13,7 @@ import { useEntityForm } from "@/composables/useEntityForm";
 import { administratorsService } from "@/services/administrators/administratorsService";
 import { useQuery } from "vue-query";
 import { postgrestClient } from "@/clients/postgrestClient";
+import RoleSelectFormItem from "@/pages/Administrators/RoleSelectFormItem.vue";
 defineEmits<{
   (e: "submitted"): void;
 }>();
@@ -63,25 +64,7 @@ const { form, handleSubmit, isSubmitting, errorBag, errorMessage } =
           v-model="form.confirmationPassword"
         ></ElInput>
       </ElFormItem>
-      <ElFormItem :label="t('role')" class="w-full">
-        <ElSelect
-          class="w-full"
-          :placeholder="t('select_role')"
-          :disabled="isFetchingDependencies"
-          v-model="form.role"
-          data-testid="role-select"
-        >
-          <ElOption
-            v-for="role in [
-              { role: 'superadmin', displayName: t('superadmin') },
-              { role: 'admin', displayName: t('admin') },
-            ]"
-            :key="role.role"
-            :label="role.displayName"
-            :value="role.role"
-          />
-        </ElSelect>
-      </ElFormItem>
+      <RoleSelectFormItem v-model="form.role" />
       <ElFormItem :label="t('select_dependency')" class="w-full">
         <ElSelect
           class="w-full"
