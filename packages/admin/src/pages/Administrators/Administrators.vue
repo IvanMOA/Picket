@@ -40,7 +40,7 @@ const closeDialog = () => {
           <p class="text-sm text-gray-400">
             {{
               t(
-                user.role === "SUPERADMIN"
+                user.role === "superadmin"
                   ? "users_section_superadmin_description"
                   : "users_section_admin_description"
               )
@@ -57,11 +57,22 @@ const closeDialog = () => {
       <EntityTable
         base-route="/users"
         entity-route="/administrators"
+        :params="{
+          select: '*,dependencies(name)',
+        }"
         fts-column-name="name"
       >
         <template v-slot:columns>
           <ElTableColumn :label="t('name')" prop="name" />
           <ElTableColumn :label="t('email')" prop="email" />
+          <ElTableColumn
+            v-if="user.role === 'superadmin'"
+            :label="t('dependency')"
+          >
+            <template #default="scope">
+              <p class="break-normal">{{ scope.row?.dependencies?.name }}</p>
+            </template>
+          </ElTableColumn>
           <ElTableColumn :label="t('actions')">
             <template #default="scope">
               <ElButton

@@ -94,4 +94,5 @@ export const esLocale = {
   see_svg: "Ver svg",
   zones: "Zonas",
   add_zone: "Agregar zona",
+  dependency: "Dependencia",
 };

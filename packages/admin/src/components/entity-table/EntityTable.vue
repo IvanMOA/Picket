@@ -18,6 +18,7 @@ const props = defineProps<{
   entityRoute: string;
   ftsColumnName: string;
   baseRoute: string;
+  params?: Record<string, string>;
 }>();
 const router = useRouter();
 const queryClient = useQueryClient();
@@ -53,12 +54,17 @@ const { data, isFetching, isError } = useQuery(
         String(searchTermDebounced.value)
       )}:*`;
     const { data: _data, headers } = await postgrestClient.get(
-      `${props.entityRoute}?limit=10&offset=${10 * (currentPage.value - 1)}`,
+      `${props.entityRoute}`,
       {
         headers: {
           Prefer: "count=exact",
         },
-        params,
+        params: {
+          ...params,
+          limit: 10,
+          offset: 10 * (currentPage.value - 1),
+          ...(props.params ?? {}),
+        },
       }
     );
     const totalEntities = Number(headers["content-range"].split("/")[1]);
