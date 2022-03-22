@@ -32,6 +32,10 @@ export const esLocale = {
       title: "Lugar actualizado",
       message: "Se ha actualizado la información del lugar",
     },
+    event: {
+      title: "Evento actualizado",
+      message: "Se ha actualizado un nuevo evento de tu dependencia",
+    },
   },
   deleted: {
     dependency: {
@@ -47,6 +51,10 @@ export const esLocale = {
       title: "Lugar eliminado",
       message: "Se ha eliminado el lugar",
     },
+    event: {
+      title: "Evento eliminado",
+      message: "Se ha eliminado un evento de tu dependencia",
+    },
   },
   created: {
     dependency: {
@@ -61,6 +69,10 @@ export const esLocale = {
     place: {
       title: "Lugar creado",
       message: "Se ha creado un nuevo lugar",
+    },
+    event: {
+      title: "Evento creado",
+      message: "Se ha creado un nuevo evento para tu dependencia",
     },
   },
   role: "Rol",
@@ -95,4 +107,16 @@ export const esLocale = {
   zones: "Zonas",
   add_zone: "Agregar zona",
   dependency: "Dependencia",
+  events_section_title: "Eventos",
+  events_section_description: "Administra los eventos de tu dependencia",
+  event_starts_at: "Inicio de evento",
+  event_available_since: "Disponible a partir de fecha",
+  event_available_until: "Fecha límite para apartar",
+  select_place: "Seleccionar el lugar",
+  date_starts_at: "Fecha de inicio",
+  update_event: "Actualizar evento",
+  tickets_per_person: "Tickets por persona",
+  description: "Descripción",
+  details: "Detalles",
+  see_zones: "Ver zonas",
 };

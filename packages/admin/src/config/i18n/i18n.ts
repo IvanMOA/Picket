@@ -6,4 +6,21 @@ export const i18n = createI18n({
   messages: {
     es: esLocale,
   },
+  datetimeFormats: {
+    es: {
+      short: {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      },
+      long: {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        weekday: "long",
+        hour: "numeric",
+        minute: "numeric",
+      },
+    },
+  },
 });
