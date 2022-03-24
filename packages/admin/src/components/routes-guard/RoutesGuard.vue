@@ -24,14 +24,17 @@ watchEffect((onCleanup) => {
   if (isOnlyPublicWhileUserIsLoggedIn(router.currentRoute.value)) {
     router.push({ name: "Dashboard" });
   }
-  if (isPrivateWhileNotLoggedIn(router.currentRoute.value)) {
+  if (
+    isPrivateWhileNotLoggedIn(router.currentRoute.value) &&
+    !loadingUser.value
+  ) {
     router.push({ name: "Login" });
   }
   const unregisterBeforeEachRouteGuard = router.beforeEach((to, from, next) => {
     if (
       to.meta.authType === AuthType.PRIVATE &&
       user.value === null &&
-      !loadingUser
+      !loadingUser.value
     ) {
       return next({ name: "Login" });
     }
