@@ -11,22 +11,14 @@ describe("Super admin login", async () => {
     );
   });
   it("Creates a zone", () => {
-    const args = {
+    cy.login("axel.moraleso@uanl.mx", "123123");
+    cy.createEvent({
       name: "Tigres vs America",
       description: "Tigres contra Rayados Primera Jornada",
       ticketsPerPerson: "2",
       place: "Gaspar Mass",
-    };
-    cy.login("axel.moraleso@uanl.mx", "123123");
-    cy.testId("events-section-link").click();
-    cy.testId("create-event-btn").click();
-    cy.testId("name-input").type(args.name);
-    cy.testId("description-input").type(args.description);
-    cy.testId("tickets-per-person-input").clear().type(args.ticketsPerPerson);
-    cy.testId("place-select").click();
-    cy.contains(args.place).click();
-    cy.testId("submit-btn").click();
-    cy.get("table").should("contain", args.name);
+    });
+    cy.get("table").should("contain", "Tigres vs America");
     cy.testId("zones-link").click();
     cy.testId("create-zone-btn").click({ force: true });
     cy.testId("name-input").type("New zone");
@@ -36,5 +28,22 @@ describe("Super admin login", async () => {
       cy.contains("3").click();
     });
     cy.get("table").should("contain", "New zone");
+  });
+  it.only("Updates a zone", () => {
+    cy.login("axel.moraleso@uanl.mx", "123123");
+    cy.createEvent({
+      name: "Tigres vs America",
+      description: "Tigres contra Rayados Primera Jornada",
+      ticketsPerPerson: "2",
+      place: "Gaspar Mass",
+    });
+    cy.get("table").should("contain", "Tigres vs America");
+    cy.testId("zones-link").click();
+    cy.testId("update-zone-btn").eq(1).click();
+    cy.testId("name-input").clear().type("A new section");
+    cy.testId("capacity-input").clear().type("320");
+    cy.testId("submit-btn").click();
+    cy.get("table").should("contain", "A new section");
+    cy.get("table").should("contain", "320");
   });
 });

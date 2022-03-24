@@ -32,6 +32,16 @@ Cypress.Commands.add("createAdministrator", (args) => {
   cy.contains(args.dependencyName).click();
   cy.testId("submit-btn").click();
 });
+Cypress.Commands.add("createEvent", (args) => {
+  cy.testId("events-section-link").click();
+  cy.testId("create-event-btn").click();
+  cy.testId("name-input").type(args.name);
+  cy.testId("description-input").type(args.description);
+  cy.testId("tickets-per-person-input").clear().type(args.ticketsPerPerson);
+  cy.testId("place-select").click();
+  cy.contains(args.place).click();
+  cy.testId("submit-btn").click();
+});
 Cypress.on("uncaught:exception", (err, runnable) => {
   return false;
 });

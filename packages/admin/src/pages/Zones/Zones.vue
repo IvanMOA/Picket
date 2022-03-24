@@ -1,20 +1,14 @@
 <script lang="ts" setup>
 import AdminLayout from "@/layouts/AdminLayout/AdminLayout.vue";
-import { ElButton, ElTableColumn, ElDialog } from "element-plus";
-import { Menu } from "@element-plus/icons-vue";
+import { ElButton, ElDialog, ElTableColumn } from "element-plus";
 import EntityTable from "@/components/entity-table/EntityTable.vue";
 import { useLoggedInUser } from "@/stores/UserStore";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { PlaceDTO } from "@picket/shared/dist/dts/dtos/PlaceDTO";
-import CreatePlaceForm from "@/pages/Places/CreatePlaceForm.vue";
-import UpdatePlaceForm from "@/pages/Places/UpdatePlaceForm.vue";
-import DeletePlaceForm from "@/pages/Places/DeletePlaceForm.vue";
-import CreateEventForm from "@/pages/Events/CreateEventForm.vue";
-import UpdateEventForm from "@/pages/Events/UpdateEventForm.vue";
-import DeleteEventForm from "@/pages/Events/DeleteEventForm.vue";
 import { useRouter } from "vue-router";
 import CreateZoneForm from "@/pages/Zones/CreateZoneForm.vue";
+import UpdateZoneForm from "@/pages/Zones/UpdateZoneForm.vue";
+import { ZoneDTO } from "@picket/shared";
 const isDialogOpen = ref(false);
 type PlaceDialogAction = "CREATE" | "UPDATE" | "DELETE" | "SEE_SVG";
 const dialogType = ref<PlaceDialogAction>("UPDATE");
@@ -22,9 +16,9 @@ const { user } = useLoggedInUser();
 const { t, d } = useI18n();
 const router = useRouter();
 const eventIdFromParams = router.currentRoute.value.params.eventId;
-const selectedEventForModal = ref<PlaceDTO | null>();
-const openDialog = (newDialogType: PlaceDialogAction, place?: PlaceDTO) => {
-  selectedEventForModal.value = place;
+const selectedZoneForModal = ref<ZoneDTO | null>();
+const openDialog = (newDialogType: PlaceDialogAction, place?: ZoneDTO) => {
+  selectedZoneForModal.value = place;
   isDialogOpen.value = true;
   dialogType.value = newDialogType;
 };
@@ -110,12 +104,12 @@ const closeDialog = () => {
         <!--          v-if="dialogType === 'DELETE'"-->
         <!--          :eventDTO="selectedEventForModal"-->
         <!--        />-->
-        <!--        <UpdateEventForm-->
-        <!--          :key="selectedEventForModal.id"-->
-        <!--          @submitted="closeDialog"-->
-        <!--          v-if="dialogType === 'UPDATE'"-->
-        <!--          :eventDTO="selectedEventForModal"-->
-        <!--        />-->
+        <UpdateZoneForm
+          :key="selectedZoneForModal.id"
+          @submitted="closeDialog"
+          v-if="dialogType === 'UPDATE'"
+          :zoneDTO="selectedZoneForModal"
+        />
       </ElDialog>
     </div>
   </AdminLayout>

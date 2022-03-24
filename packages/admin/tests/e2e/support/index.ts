@@ -14,6 +14,12 @@ declare global {
         role: string;
         dependencyName: string;
       });
+      createEvent(args: {
+        name: string;
+        description: string;
+        ticketsPerPerson: string;
+        place: string;
+      });
     }
   }
 }
