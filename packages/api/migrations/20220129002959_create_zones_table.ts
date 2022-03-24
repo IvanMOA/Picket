@@ -1,18 +1,25 @@
 import { Knex } from "knex";
 export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable("zones", (t) => {
-    t.uuid("id").unique().defaultTo(knex.raw("gen_random_uuid()"));
-    t.uuid("place_id").unsigned().references("places.id").onDelete("CASCADE");
+    t.uuid("id")
+      .unique()
+      .defaultTo(knex.raw("gen_random_uuid()"))
+      .notNullable();
     t.uuid("event_id")
+      .notNullable()
       .unsigned()
       .references("events.id")
-      .nullable()
       .onDelete("CASCADE");
-    t.string("name");
-    t.boolean("active");
-    t.integer("capacity");
-    t.timestamp("created_at", { useTz: true }).defaultTo(knex.fn.now());
-    t.timestamp("updated_at", { useTz: true }).defaultTo(knex.fn.now());
+    t.string("name").notNullable();
+    t.boolean("active").notNullable();
+    t.integer("capacity").notNullable();
+    t.integer("sold_tickets").notNullable();
+    t.timestamp("created_at", { useTz: true })
+      .defaultTo(knex.fn.now())
+      .notNullable();
+    t.timestamp("updated_at", { useTz: true })
+      .defaultTo(knex.fn.now())
+      .notNullable();
   });
   await knex.raw(`
     alter table zones enable row level security;

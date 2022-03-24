@@ -68,7 +68,10 @@ const closeDialog = () => {
                 type="text"
                 data-testid="see-event-zones-link"
               >
-                <router-link :to="`/events/${scope.row.id}/zones`">
+                <router-link
+                  data-testid="zones-link"
+                  :to="`/events/${scope.row.id}/zones`"
+                >
                   {{ t("see_zones") }}
                 </router-link>
               </ElButton>

@@ -80,10 +80,9 @@ const { data, isFetching, isError } = useQuery(
   }
 );
 const navigateToNewPage = (newPage: number) => {
-  router.push(`${props.baseRoute}?page=${newPage}`);
+  router.push(`${router.currentRoute.value.path}?page=${newPage}`);
 };
 onMounted(() => {
-  console.log("ok");
   queryClient.invalidateQueries({ queryKey: [props.entityRoute] });
 });
 </script>

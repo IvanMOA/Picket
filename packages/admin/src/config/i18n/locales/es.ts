@@ -119,4 +119,12 @@ export const esLocale = {
   description: "Descripción",
   details: "Detalles",
   see_zones: "Ver zonas",
+  capacity: "Capacidad",
+  sold_tickets: "Tickets vendidos",
+  zones_section_title: "Zonas",
+  zones_section_description: "Administra las zonas del evento",
+  create_zone: "Crear zona",
+  update_zone: "Actualizar zona",
+  delete_zone: "Eliminar zona",
+  active: "Activa",
 };

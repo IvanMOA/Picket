@@ -42,6 +42,7 @@ export const eventsService = {
         name: zone_template.name,
         active: true,
         capacity: 0,
+        sold_tickets: 0,
       }))
     );
   },
