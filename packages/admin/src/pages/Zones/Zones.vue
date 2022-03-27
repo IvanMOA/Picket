@@ -9,6 +9,7 @@ import { useRouter } from "vue-router";
 import CreateZoneForm from "@/pages/Zones/CreateZoneForm.vue";
 import UpdateZoneForm from "@/pages/Zones/UpdateZoneForm.vue";
 import { ZoneDTO } from "@picket/shared";
+import DeleteZoneForm from "@/pages/Zones/DeleteZoneForm.vue";
 const isDialogOpen = ref(false);
 type PlaceDialogAction = "CREATE" | "UPDATE" | "DELETE" | "SEE_SVG";
 const dialogType = ref<PlaceDialogAction>("UPDATE");
@@ -98,12 +99,12 @@ const closeDialog = () => {
           v-if="dialogType === 'CREATE'"
           :event-id="eventIdFromParams"
         />
-        <!--        <DeleteEventForm-->
-        <!--          :key="selectedEventForModal.id"-->
-        <!--          @submitted="closeDialog"-->
-        <!--          v-if="dialogType === 'DELETE'"-->
-        <!--          :eventDTO="selectedEventForModal"-->
-        <!--        />-->
+        <DeleteZoneForm
+          :key="selectedZoneForModal.id"
+          @submitted="closeDialog"
+          v-if="dialogType === 'DELETE'"
+          :zoneDTO="selectedZoneForModal"
+        />
         <UpdateZoneForm
           :key="selectedZoneForModal.id"
           @submitted="closeDialog"

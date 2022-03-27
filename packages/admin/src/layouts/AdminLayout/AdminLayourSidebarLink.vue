@@ -15,7 +15,7 @@ const isInThisRoute = computed(() =>
 <template>
   <router-link
     :class="{
-      'border-indigo-500': isInThisRoute,
+      'border-violet-700': isInThisRoute,
       'border-transparent': !isInThisRoute,
     }"
     :to="to"

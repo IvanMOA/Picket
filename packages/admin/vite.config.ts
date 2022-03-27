@@ -8,6 +8,7 @@ if (process.env.NODE_ENV === "production") {
   process.env.VITE_APP_BUILD_EPOCH = new Date().getTime().toString();
 }
 export default defineConfig({
+  publicDir: "./src/assets",
   plugins: [
     vue({
       script: {

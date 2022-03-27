@@ -24,7 +24,7 @@ const { form, handleSubmit, isSubmitting, errorBag, errorMessage } =
     onSubmit: (args) =>
       eventsService.create({ ...args, dependencyId: user.dependencyId }),
     successNotificationTitle: t("created.event.title"),
-    successNotificationMessage: "created.event.message",
+    successNotificationMessage: t("created.event.message"),
     queriesToInvalidate: "/events",
   });
 </script>

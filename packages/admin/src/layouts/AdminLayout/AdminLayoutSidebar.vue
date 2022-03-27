@@ -24,7 +24,7 @@ const { user } = useLoggedInUser();
     class="h-screen absolute z-50 shadow-lg w-[80vw] sm:relative sm:block sm:w-80"
   >
     <div class="bg-white h-full dark:bg-gray-700">
-      <div class="flex items-center justify-between pt-6 ml-8 pr-4">
+      <div class="flex items-center px-4 pt-6">
         <p class="font-bold dark:text-white text-xl">Picket</p>
         <ElButton
           :icon="CaretLeft"

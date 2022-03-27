@@ -20,8 +20,8 @@ const { form, handleSubmit, isSubmitting, errorBag, errorMessage } =
     },
     onSubmit: (args) =>
       zonesService.create({ ...args, eventId: props.eventId }),
-    successNotificationTitle: t("created.event.title"),
-    successNotificationMessage: "created.event.message",
+    successNotificationTitle: t("created.zone.title"),
+    successNotificationMessage: t("created.zone.message"),
     queriesToInvalidate: "/zones",
   });
 </script>

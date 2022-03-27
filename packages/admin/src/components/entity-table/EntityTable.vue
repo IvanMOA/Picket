@@ -38,7 +38,7 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 watch(searchTermDebounced, (value) => {
   // totalPages.value = 0;
   router.push({
-    path: `${props.baseRoute}`,
+    path: router.currentRoute.value.path,
     query: {
       page: 1,
       search: value,
@@ -93,6 +93,7 @@ onMounted(() => {
       v-model="searchTerm"
       :placeholder="t('search')"
       class="input-with-select"
+      data-testid="search-input"
     >
       <template #prepend>
         <ElButton :icon="Search" />
@@ -102,7 +103,7 @@ onMounted(() => {
   <div class="px-4 py-4 relative w-full">
     <div
       v-if="isFetching"
-      class="bg-indigo-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20"
+      class="bg-violet-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20"
     >
       <Spinner primary />
     </div>

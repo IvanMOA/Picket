@@ -33,4 +33,11 @@ export const zonesService = {
       }
     );
   },
+  delete: async (zoneDTO: ZoneDTO) => {
+    await postgrestClient.delete("/zones", {
+      params: {
+        id: `eq.${zoneDTO.id}`,
+      },
+    });
+  },
 };

@@ -1,5 +1,5 @@
 import { esLocale } from "../../../src/config/i18n/locales/es";
-describe("Super admin login", async () => {
+describe("Administrators CRUD", async () => {
   beforeEach(() => {
     cy.request(
       "post",

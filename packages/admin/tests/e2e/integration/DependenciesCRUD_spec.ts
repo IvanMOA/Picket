@@ -1,6 +1,6 @@
 import { waitFor } from "@testing-library/vue";
 import { esLocale } from "../../../src/config/i18n/locales/es";
-describe("Super admin login", async () => {
+describe("Dependencies CRUD", async () => {
   beforeEach(() => {
     cy.request(
       "post",

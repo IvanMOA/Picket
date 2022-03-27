@@ -29,7 +29,7 @@ Cypress.Commands.add("createAdministrator", (args) => {
   cy.testId("role-select").click();
   cy.contains(args.role).click();
   cy.testId("dependency-select").click();
-  cy.contains(args.dependencyName).click();
+  cy.contains("span", args.dependencyName).click();
   cy.testId("submit-btn").click();
 });
 Cypress.Commands.add("createEvent", (args) => {

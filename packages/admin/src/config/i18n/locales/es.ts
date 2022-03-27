@@ -34,7 +34,11 @@ export const esLocale = {
     },
     event: {
       title: "Evento actualizado",
-      message: "Se ha actualizado un nuevo evento de tu dependencia",
+      message: "Se ha actualizado un evento de tu dependencia",
+    },
+    zone: {
+      title: "Zona actualizada",
+      message: "Se ha actualizado una zona",
     },
   },
   deleted: {
@@ -55,6 +59,10 @@ export const esLocale = {
       title: "Evento eliminado",
       message: "Se ha eliminado un evento de tu dependencia",
     },
+    zone: {
+      title: "Zona eliminada",
+      message: "Se ha eliminado una zona",
+    },
   },
   created: {
     dependency: {
@@ -73,6 +81,10 @@ export const esLocale = {
     event: {
       title: "Evento creado",
       message: "Se ha creado un nuevo evento para tu dependencia",
+    },
+    zone: {
+      title: "Zona creada",
+      message: "Se ha creado una nueva zona",
     },
   },
   role: "Rol",

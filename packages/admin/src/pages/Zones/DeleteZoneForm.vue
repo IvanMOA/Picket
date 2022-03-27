@@ -16,18 +16,19 @@ const { form, handleSubmit, isSubmitting, errorBag, errorMessage } =
     initialValues: {
       ...props.zoneDTO,
     },
-    onSubmit: (args) => zonesService.update(args),
-    successNotificationTitle: t("updated.zone.title"),
-    successNotificationMessage: t("updated.zone.message"),
+    onSubmit: (args) => zonesService.delete(args),
+    successNotificationTitle: t("deleted.zone.title"),
+    successNotificationMessage: t("deleted.zone.message"),
     queriesToInvalidate: "/zones",
   });
 </script>
 <template>
   <div>
     <ZoneForm
+      disable
       :handle-submit="handleSubmit"
       :is-submitting="isSubmitting"
-      :submit-btn-text="t('update')"
+      :submit-btn-text="t('delete')"
       v-model:name="form.name"
       v-model:capacity="form.capacity"
       v-model:soldTickets="form.sold_tickets"
