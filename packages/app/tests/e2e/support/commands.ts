@@ -1,14 +1,17 @@
 Cypress.Commands.add("dataCy", (value, opts?: any) => {
   cy.get(`[data-cy=${value}]`, opts ?? {});
 });
+Cypress.Commands.add("testId", (value, opts?: any) => {
+  cy.get(`[data-testid=${value}]`, opts ?? {});
+});
 Cypress.Commands.add("register", (name, phoneNumber) => {
   cy.dataCy("name-input").type(name);
   cy.dataCy("phone-number-input").type(phoneNumber);
   cy.dataCy("submit-btn").click();
 });
 Cypress.Commands.add("login", (phoneNumber) => {
-  cy.dataCy("phone-number-input").type(phoneNumber);
-  cy.dataCy("submit-btn").click();
+  cy.testId("phone-number-input").type(phoneNumber);
+  cy.testId("submit-btn").click();
   cy.wait(1000);
   cy.request(
     "get",
@@ -16,7 +19,7 @@ Cypress.Commands.add("login", (phoneNumber) => {
       phoneNumber
     )}`
   ).then((res) => {
-    cy.dataCy("verification-code-input").type(res.body.verification_code);
-    cy.dataCy("submit-btn").click();
+    cy.testId("verification-code-input").type(res.body.verification_code);
+    cy.testId("submit-btn").click();
   });
 });
