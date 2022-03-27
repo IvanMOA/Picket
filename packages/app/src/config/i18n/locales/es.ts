@@ -16,6 +16,8 @@ export const esLocale = {
   verify_code: "Verificar código",
   if_dont_have_an_account_then: "o, si no tienes una cuenta puedes",
   create_one: "crear una",
+  register: "Registrate",
+  if_already_have_an_account_then: "o, si ya tienes una cuenta",
   register_subtitle:
     "Hemos creado este sitio para que obtengas tus boletos a eventos y puedas acceder a ellos facilmente",
 };

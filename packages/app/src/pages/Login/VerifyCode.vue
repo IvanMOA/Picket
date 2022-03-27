@@ -17,10 +17,6 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <!--  <div>-->
-  <!--    <input v-model="verifyCodeForm.code" data-cy="verification-code-input" />-->
-  <!--    <button :disabled="isVerifyingCode" data-cy="submit-btn" @click="handleSubmit">Verificar código</button>-->
-  <!--  </div>-->
   <ElForm class="w-full flex flex-col" label-position="top">
     <ElFormItem :label="t('verification_code')">
       <ElInput

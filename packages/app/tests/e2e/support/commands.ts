@@ -5,9 +5,9 @@ Cypress.Commands.add("testId", (value, opts?: any) => {
   cy.get(`[data-testid=${value}]`, opts ?? {});
 });
 Cypress.Commands.add("register", (name, phoneNumber) => {
-  cy.dataCy("name-input").type(name);
-  cy.dataCy("phone-number-input").type(phoneNumber);
-  cy.dataCy("submit-btn").click();
+  cy.testId("name-input").type(name);
+  cy.testId("phone-number-input").type(phoneNumber);
+  cy.testId("submit-btn").click();
 });
 Cypress.Commands.add("login", (phoneNumber) => {
   cy.testId("phone-number-input").type(phoneNumber);
