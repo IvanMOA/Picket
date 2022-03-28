@@ -6,6 +6,7 @@ import Login from "@/pages/Login/Login.vue";
 import AskForVerificationCode from "@/pages/Login/AskForVerificationCode.vue";
 import EventDetails from "@/pages/EventDetails/EventDetails.vue";
 import VerifyCode from "@/pages/Login/VerifyCode.vue";
+import Tickets from "@/pages/Tickets/Tickets.vue";
 export enum AuthType {
   "PUBLIC" = "PUBLIC",
   "PRIVATE" = "PRIVATE",
@@ -26,6 +27,14 @@ const router = createRouter({
       path: "/events/:eventId",
       component: EventDetails,
       name: "EventDetails",
+      meta: {
+        authType: AuthType.PRIVATE,
+      },
+    },
+    {
+      path: "/tickets",
+      component: Tickets,
+      name: "Tickets",
       meta: {
         authType: AuthType.PRIVATE,
       },

@@ -16,8 +16,8 @@ const { t } = useI18n();
         <TopbarLink to="/">
           {{ t("home") }}
         </TopbarLink>
-        <TopbarLink to="/about">
-          {{ t("about") }}
+        <TopbarLink to="/tickets">
+          {{ t("my_tickets") }}
         </TopbarLink>
       </nav>
       <div

@@ -6,12 +6,14 @@ export const esLocale = {
     email_not_found: "No se encontró ese correo",
     unknown: "Error desconocido",
   },
+  zone: "Zona",
   created: {
     tickets: {
       title: "Tickets reservados",
       message: "Ahora puedes utilizarlos para ingresar al evento",
     },
   },
+  my_tickets: "Mis tickets",
   register_uptitle: "No pierdas el tiempo",
   register_title: "Obtén tus boletos al instante",
   phone_number: "Número de celular",
