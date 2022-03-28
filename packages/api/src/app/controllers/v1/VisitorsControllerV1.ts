@@ -11,7 +11,7 @@ export class VisitorsControllerV1 extends BaseController {
     super();
     this.registerVisitor = new RegisterVisitor(visitorsRepository);
     this.router = Router();
-    this.router.post("/v1/visitors", this.create);
+    this.router.post("/v1/visitors/register", this.create);
   }
   private create = async (req: Request, res: Response) =>
     this.wrapToHandleErrors(async () => {

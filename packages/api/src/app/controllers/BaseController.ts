@@ -12,7 +12,7 @@ export abstract class BaseController {
     try {
       return await wrapedFn();
     } catch (error) {
-      logger.error(error);
+      console.log(error);
       if (error instanceof ValidationError) {
         return res.status(422).json({
           message: "Validation error",

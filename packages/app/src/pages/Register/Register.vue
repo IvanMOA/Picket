@@ -12,9 +12,9 @@ const form = reactive({
   phoneNumber: "",
 });
 const { register, isRegistering, serverFormErrors } = useRegister();
-const handleSubmit = (values) => {
-  register(values.name, values.phoneNumber);
-  router.push({ name: "AskForVerificationCode" });
+const handleSubmit = async () => {
+  await register(form.name, form.phoneNumber);
+  await router.push({ name: "AskForVerificationCode" });
 };
 </script>
 

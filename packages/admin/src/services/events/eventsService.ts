@@ -21,6 +21,7 @@ export const eventsService = {
         name: args.name,
         description: args.description,
         tickets_per_person: args.ticketsPerPerson,
+        sections_svg_filename: placeDTO.sections_svg_filename,
         starts_at: args.startsAt,
         available_since: args.availableSince,
         available_until: args.availableUntil,
@@ -37,7 +38,6 @@ export const eventsService = {
     await postgrestClient.post(
       "/zones",
       placeDTO.zones_template.map((zone_template) => ({
-        place_id: placeDTO.id,
         event_id: createdEventDTO.id,
         name: zone_template.name,
         active: true,

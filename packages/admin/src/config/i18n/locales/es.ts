@@ -6,6 +6,7 @@ export const esLocale = {
     email_not_found: "No se encontró ese correo",
     unknown: "Error desconocido",
   },
+  select_zone: "Seleccionar zona",
   dashboard_welcome: "Bienvenido, {name}",
   dashboard_description: "Revisa lo que está sucediendo",
   logout: "Cerrar sesión",

@@ -14,8 +14,10 @@ export const useRegister = () => {
       });
     } catch (e) {
       console.log(e);
+      throw e;
+    } finally {
+      isRegistering.value = false;
     }
-    isRegistering.value = false;
   };
   return {
     isRegistering,

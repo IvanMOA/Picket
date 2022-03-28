@@ -3,6 +3,7 @@ export type EventDTO = {
   dependency_id: string;
   place_id: string;
   name: string;
+  sections_svg_filename: string;
   description: string;
   tickets_per_person: number;
   starts_at: string;

@@ -27,6 +27,7 @@ export async function up(knex: Knex): Promise<void> {
       using (true)
       with check ((select dependency_id from events where id = event_id)::text = current_setting('request.jwt.claim.dependencyId', true));
     grant select on zones to superadmin;
+    grant select on zones to visitor;
     grant select on zones to admin;
     grant insert on zones to admin;
     grant update on zones to admin;

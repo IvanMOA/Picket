@@ -18,8 +18,11 @@ describe("Zones CRUD", async () => {
       ticketsPerPerson: "2",
       place: "Gaspar Mass",
     });
-    cy.get("table").should("contain", "Tigres vs America");
-    cy.testId("zones-link").click();
+    cy.contains("td", "Tigres vs America")
+      .parent()
+      .within(() => {
+        cy.testId("zones-link").click();
+      });
     cy.testId("create-zone-btn").click({ force: true });
     cy.testId("name-input").type("New zone");
     cy.testId("capacity-input").type("100");
@@ -36,7 +39,11 @@ describe("Zones CRUD", async () => {
       place: "Gaspar Mass",
     });
     cy.get("table").should("contain", "Tigres vs America");
-    cy.testId("zones-link").click();
+    cy.contains("td", "Tigres vs America")
+      .parent()
+      .within(() => {
+        cy.testId("zones-link").click();
+      });
     cy.testId("update-zone-btn").eq(1).click();
     cy.testId("name-input").clear().type("A new section");
     cy.testId("capacity-input").clear().type("320");
@@ -53,7 +60,11 @@ describe("Zones CRUD", async () => {
       place: "Gaspar Mass",
     });
     cy.get("table").should("contain", "Tigres vs America");
-    cy.testId("zones-link").click();
+    cy.contains("td", "Tigres vs America")
+      .parent()
+      .within(() => {
+        cy.testId("zones-link").click();
+      });
     cy.testId("delete-zone-btn").eq(1).click();
     cy.testId("submit-btn").click();
     cy.get("table").should("not.contain", "Sección 2");

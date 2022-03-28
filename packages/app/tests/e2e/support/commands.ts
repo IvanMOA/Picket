@@ -23,3 +23,6 @@ Cypress.Commands.add("login", (phoneNumber) => {
     cy.testId("submit-btn").click();
   });
 });
+Cypress.on("uncaught:exception", (err, runnable) => {
+  return false;
+});

@@ -8,6 +8,7 @@ export async function up(knex: Knex): Promise<void> {
       .references("dependencies.id")
       .onDelete("CASCADE");
     t.string("name");
+    t.string("sections_svg_filename").notNullable();
     t.integer("tickets_per_person");
     t.string("description");
     t.timestamp("starts_at");
@@ -19,9 +20,10 @@ export async function up(knex: Knex): Promise<void> {
   await knex.raw(`
     alter table events enable row level security;
     create policy events_policy on events
-      using ( (current_setting('request.jwt.claim.dependencyId', true) = dependency_id::text) OR (current_setting('request.jwt.claim.role', true) = 'superadmin') )
+      using (true)
       with check (current_setting('request.jwt.claim.dependencyId', true) = dependency_id::text);
     grant select on events to superadmin;
+    grant select on events to visitor;
     grant select on events to admin;
     grant insert on events to admin;
     grant update on events to admin;
