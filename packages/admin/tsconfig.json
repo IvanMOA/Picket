@@ -14,7 +14,8 @@
     ],
     "types": [
       "vite/client",
-      "jest"
+      "jest",
+      "vitest/globals"
     ],
     "resolveJsonModule": true,
     "plugins": [
@@ -32,7 +33,7 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.vue",
-    "./jest-setup.ts"
+    "setup.ts"
   ],
   "exclude": [
     "node_modules",
