@@ -5,7 +5,7 @@ import EntityTable from "@/components/entity-table/EntityTable.vue";
 import { useLoggedInUser } from "@/stores/UserStore";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { PlaceDTO } from "@picket/shared/dist/dts/dtos/PlaceDTO";
+import type { PlaceDTO } from "@picket/shared/dist/dts/dtos/PlaceDTO";
 import CreatePlaceForm from "@/pages/Places/CreatePlaceForm.vue";
 import UpdatePlaceForm from "@/pages/Places/UpdatePlaceForm.vue";
 import DeletePlaceForm from "@/pages/Places/DeletePlaceForm.vue";

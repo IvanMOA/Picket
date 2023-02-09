@@ -14,7 +14,11 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
-    setupFiles: "./setup.ts"
+    setupFiles: "./setup.ts",
+    deps: {
+      // see https://github.com/vitest-dev/vitest/issues/1388
+      inline: ['element-plus']
+    }
   },
   plugins: [
     vue({

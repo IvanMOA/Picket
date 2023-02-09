@@ -4,7 +4,7 @@ import { useI18n } from "vue-i18n";
 import { useEntityForm } from "@/composables/useEntityForm";
 import { placesService } from "@/services/places/placesService";
 import { ref } from "vue";
-import { PlaceDTO } from "@picket/shared/dist/dts/dtos/PlaceDTO";
+import type { PlaceDTO } from "@picket/shared/dist/dts/dtos/PlaceDTO";
 import PlacesForm from "@/pages/Places/PlacesForm.vue";
 const props = defineProps<{
   placeDTO: PlaceDTO;
